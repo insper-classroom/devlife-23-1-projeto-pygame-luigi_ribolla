@@ -13,19 +13,23 @@ assets = {
    'player': player
 }
 
+state = {
+    'mapa' : (2000,1500)
+}
+
 def checa_eventos():
     for event in pg.event.get():
         if event.type == pg.QUIT:
             return False
             
     tecla = pg.key.get_pressed()
-    if tecla[pg.K_a]:
+    if tecla[pg.K_a] or tecla[pg.K_LEFT]:
         knight_pos[0] -= 0.12
-    if tecla[pg.K_d]:
+    if tecla[pg.K_d] or tecla[pg.K_RIGHT]:
         knight_pos[0] += 0.12
-    if tecla[pg.K_w]:
+    if tecla[pg.K_w] or tecla[pg.K_UP]:
         knight_pos[1] -= 0.12
-    if tecla[pg.K_s]:
+    if tecla[pg.K_s] or tecla[pg.K_DOWN]:
         knight_pos[1] += 0.12
     return True
 
