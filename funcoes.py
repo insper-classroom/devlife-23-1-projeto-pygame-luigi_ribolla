@@ -4,10 +4,10 @@ pg.init()
 largura, altura = 800, 600
 window = pg.display.set_mode((largura, altura))
 
-player_img = pg.image.load("docs/assets/img/player.png")
-player = pg.transform.scale(player_img, (50, 50))
+player_img = pg.image.load("docs/assets/img/mago.png")
+player = pg.transform.scale(player_img, (250, 250))
 
-knight_pos = [400, 300]
+knight_pos = [300, 190]
 
 assets = {
    'player': player
@@ -20,16 +20,16 @@ def checa_eventos():
             
     tecla = pg.key.get_pressed()
     if tecla[pg.K_a]:
-        knight_pos[0] -= 0.1
+        knight_pos[0] -= 0.12
     if tecla[pg.K_d]:
-        knight_pos[0] += 0.1
+        knight_pos[0] += 0.12
     if tecla[pg.K_w]:
-        knight_pos[1] -= 0.1
+        knight_pos[1] -= 0.12
     if tecla[pg.K_s]:
-        knight_pos[1] += 0.1
+        knight_pos[1] += 0.12
     return True
 
 while checa_eventos():
-    window.fill((0,0,0))
+    window.fill((100,100,100))
     window.blit(assets['player'], knight_pos)
     pg.display.flip()
