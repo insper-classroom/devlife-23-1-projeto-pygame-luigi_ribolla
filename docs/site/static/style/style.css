@@ -1,0 +1,40 @@
+body{
+    text-align: center;
+    background-color: rgb(43, 40, 40);
+}
+
+img {
+    width: 4%;
+    height: 4%;
+  }
+
+h1{
+    font-family: 'Rubik Wet Paint', cursive;
+    color: white;
+}
+
+p{
+    color: white;
+}
+
+footer {
+    background-color: #322f2f;
+    color: #fff;
+    padding: 30px;
+    /* text-align: center; */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+.coluna-esquerda {
+    display: inline-block;
+    width: 10%;
+    color:white;
+  }
+  
+.coluna-direita {
+    display: inline-block;
+    width: 10%;
+    color:white;
+  }

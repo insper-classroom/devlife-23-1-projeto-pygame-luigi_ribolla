@@ -37,9 +37,9 @@ class Player:
 
         def power(self):
 
-class time:
-    def __init__(self):
-        self.frames = pg.get_ticks()
+# class time:
+#     def __init__(self):
+#         self.frames = pg.get_ticks()
         
 class jogo:
     def __init__(self):
