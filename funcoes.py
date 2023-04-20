@@ -37,7 +37,7 @@ class Player:
         }
         
         img = pg.image.load("docs/assets/img/hunter.png")
-        self.img = pg.transform.scale(img, (250, 250))
+        self.img = pg.transform.scale(img, (180, 180))
         self.rect = pg.Rect(350, 500, 250, 250)
         self.vel = [0,0]
 

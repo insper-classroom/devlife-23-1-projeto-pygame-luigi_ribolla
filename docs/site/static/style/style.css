@@ -20,21 +20,25 @@ p{
 footer {
     background-color: #322f2f;
     color: #fff;
-    padding: 30px;
+    padding: 25px;
     /* text-align: center; */
     position: fixed;
     bottom: 0;
     width: 100%;
   }
 
-.coluna-esquerda {
-    display: inline-block;
-    width: 10%;
-    color:white;
+  .coluna-esquerda {
+    float: left;
+    width: 48%;
+    color: white;
   }
   
-.coluna-direita {
-    display: inline-block;
-    width: 10%;
-    color:white;
+  .coluna-direita {
+    float: right;
+    width: 50%;
+  }
+  
+  img {
+    width: 90%;
+    height: auto;
   }
