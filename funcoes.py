@@ -1,4 +1,5 @@
 import pygame as pg
+import sys
 
 class Jogo:
     def __init__(self):
