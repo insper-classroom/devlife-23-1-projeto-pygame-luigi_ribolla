@@ -12,7 +12,7 @@ class Jogo:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return False
-        self.player.movimento()
+            self.player.movimento(event)
         return True
     
     def desenha(self):
@@ -42,34 +42,36 @@ class Player:
             'attack': [],
             'morte': [],
         }
+        
         img = pg.image.load("docs/assets/img/hunter.png")
         self.img = pg.transform.scale(img, (250, 250))
         self.rect = pg.Rect(375, 275, 250, 250)
-        self.vel = (0,0)
+        self.vel = [0,0]
 
-    def movimento(self):
-        for event in pg.event.get():
-            if event.type == pg.KEYDOWN:
-                if event.key == pg.K_a:
-                    self.vel[0] = -0.5
-                elif event.key == pg.K_d:
-                    self.vel[0] = 0.5
-                elif event.key == pg.K_w:
-                    self.vel[1] = -0.5
-                elif event.key == pg.K_s:
-                    self.vel[1] = 0.5
-            elif event.type == pg.KEYUP:
-                if event.key == pg.K_a and self.vel[0] < 0:
-                    self.vel[0] = 0
-                elif event.key == pg.K_d and self.vel[0] > 0:
-                    self.vel[0] = 0
-                elif event.key == pg.K_w and self.vel[1] < 0:
-                    self.vel[1] = 0
-                elif event.key == pg.K_s and self.vel[1] > 0:
-                    self.vel[1] = 0
+    def movimento(self,event):
+        if event.type == pg.KEYDOWN:
+            if event.key == pg.K_a:
+                self.vel[0] = -3
+            elif event.key == pg.K_d:
+                self.vel[0] = 3
+            elif event.key == pg.K_w:
+                self.vel[1] = -3
+            elif event.key == pg.K_s:
+                self.vel[1] = 3
+
+        elif event.type == pg.KEYUP:
+            if event.key == pg.K_a and self.vel[0] < 0:
+                self.vel[0] = 0
+            elif event.key == pg.K_d and self.vel[0] > 0:
+                self.vel[0] = 0
+            elif event.key == pg.K_w and self.vel[1] < 0:
+                self.vel[1] = 0
+            elif event.key == pg.K_s and self.vel[1] > 0:
+                self.vel[1] = 0
             
         self.rect.x += self.vel[0] 
         self.rect.y += self.vel[1]
+
 game = Jogo()
 
 while game.checa_eventos():
