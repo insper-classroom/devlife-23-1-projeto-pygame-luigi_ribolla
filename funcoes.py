@@ -31,7 +31,7 @@ class Player:
     def __init__(self):
         self.sprites = {
             'default ': pg.image.load("docs/assets/img/hunter.png"),
-            'move': pg.image.load("docs/assets/img/hunter_move_D.png"),
+
             'power': [],
             'attack': [],
             'morte': [],

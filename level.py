@@ -22,9 +22,9 @@ class Level:
                 x = index_coluna * TAMANHO_TILE
                 y = index_linha * TAMANHO_TILE
                 if coluna == 'x':
-                    Tile((x, y), self.sprites)
+                    Tile((x, y), [self.sprites])
                 if coluna == 'h':
-                    Hunter((x, y), self.sprites)
+                    Hunter((x, y), [self.sprites])
 
     def desenha(self):
         self.sprites.draw(self.window)
