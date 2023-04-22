@@ -20,10 +20,11 @@ class Jogo:
                     pg.quit()
                     sys.exit()
 
-            self.window.fill((0, 0, 0))
+            self.window.fill('black')
             self.level.desenha()
             pg.display.update()
             self.timer.tick(FPS)
 
 if __name__ == '__main__':
-    Jogo().desenha()
+    jogo = Jogo()
+    jogo.desenha()

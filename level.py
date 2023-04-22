@@ -12,7 +12,7 @@ class Level:
 
         # seta as sprites
         self.sprites = pg.sprite.Group()
-        self.hitbox = pg.sprite.Group()
+        self.objetos = pg.sprite.Group()
 
         self.mapa()
 
@@ -22,10 +22,11 @@ class Level:
                 x = index_coluna * TAMANHO_TILE
                 y = index_linha * TAMANHO_TILE
                 if coluna == 'x':
-                    Tile((x, y), [self.sprites])
+                    Tile((x, y), [self.sprites, self.objetos])
                 if coluna == 'h':
-                    Hunter((x, y), [self.sprites])
+                    self.hunter = Hunter((x, y), [self.sprites])
 
     def desenha(self):
         self.sprites.draw(self.window)
-        self.hitbox.draw(self.window)
+        self.sprites.update()
+        self.hunter.desenha()
