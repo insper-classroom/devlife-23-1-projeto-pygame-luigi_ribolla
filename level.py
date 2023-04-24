@@ -11,7 +11,7 @@ class Level:
         self.window = pg.display.get_surface()
 
         # seta as sprites
-        self.sprites = pg.sprite.Group()
+        self.sprites = CameraY()
         self.objetos = pg.sprite.Group()
 
         self.mapa()
@@ -24,9 +24,22 @@ class Level:
                 if coluna == 'x':
                     Tile((x, y), [self.sprites, self.objetos])
                 if coluna == 'h':
-                    self.hunter = Hunter((x, y), [self.sprites])
+                    self.hunter = Hunter((x, y), [self.sprites], self.objetos)
 
     def desenha(self):
-        self.sprites.draw(self.window)
+        self.sprites.custom_draw()
         self.sprites.update()
         self.hunter.desenha()
+
+class CameraY(pg.sprite.Group):
+    def __init__(self):
+    
+        super().__init__()
+        self.window = pg.display.get_surface()
+        self.offset = pg.math.Vector2(0,0)
+
+
+    def custom_draw(self):
+        for sprite in self.sprites():
+            offset_pos = sprite.rect.topleft + self.offset
+            self.window.blit(sprite.image, offset_pos)

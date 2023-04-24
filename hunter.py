@@ -2,14 +2,15 @@ import pygame as pg
 from constantes import *
 
 class Hunter(pg.sprite.Sprite):
-    def __init__(self, posicao, grupos):
+    def __init__(self, posicao, grupos, objetos):
         super().__init__(grupos)
         hunter = pg.image.load('docs/assets/img/hunter.png').convert_alpha()
-        self.image = pg.transform.scale(hunter, (50, 50))
-        self.rect = self.image.get_rect(topleft = posicao)
+        self.image = pg.transform.scale(hunter, (35, 35))
+        self.rect = self.image.get_rect(topleft = posicao) 
         
-        self.direcao = pg.math.Vector2()
+        self.direcao = pg.math.Vector2() # vetor de direção
         self.vel = 5
+        self.objetos = objetos
         
     def input(self):
         tecla = pg.key.get_pressed()
@@ -29,7 +30,29 @@ class Hunter(pg.sprite.Sprite):
             self.direcao.x = 0
 
     def move(self,vel):
-        self.rect.center += self.direcao * vel
+        if self.direcao.magnitude() != 0: # se o vetor não for nulo
+            self.direcao = self.direcao.normalize() # normaliza o vetor
+        
+        self.rect.x += self.direcao.x * vel
+        self.collision("x")
+        self.rect.y += self.direcao.y * vel
+        self.collision("y")
+
+    def collision(self, direcao):
+        if direcao == "x":
+            for objeto in self.objetos:
+                if objeto.rect.colliderect(self.rect):
+                    if self.direcao.x > 0: # se estiver indo para a direita
+                        self.rect.right = objeto.rect.left
+                    elif self.direcao.x < 0: # se estiver indo para a esquerda
+                        self.rect.left = objeto.rect.right
+        if direcao == "y":
+            for objeto in self.objetos:
+                if objeto.rect.colliderect(self.rect):
+                    if self.direcao.y > 0: # se estiver indo para baixo
+                        self.rect.bottom = objeto.rect.top
+                    elif self.direcao.y < 0: # se estiver indo para cima
+                        self.rect.top = objeto.rect.bottom
 
     def desenha(self):
         self.input()
