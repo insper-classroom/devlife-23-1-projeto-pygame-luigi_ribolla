@@ -3,7 +3,7 @@ import sys
 from constantes import *
 from tile import Tile
 from hunter import Hunter
-from fire import Fire
+# from fire import Fire
 
 class Level:
     def __init__(self):
@@ -26,8 +26,7 @@ class Level:
                     Tile((x, y), [self.sprites, self.objetos])
                 if coluna == 'h':
                     self.hunter = Hunter((x, y), [self.sprites], self.objetos)
-                if coluna == 'f':
-                    self.fogo = Fire((x, y), [self.sprites, self.objetos])
+
 
     def desenha(self):
         self.sprites.custom_draw(self.hunter)
@@ -49,6 +48,6 @@ class Camera(pg.sprite.Group):
         self.offset.x = player.rect.centerx - self.half_width
         self.offset.y = player.rect.centery - self.half_height
         
-        for sprite in self.sprites():
+        for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
             offset_pos = sprite.rect.topleft - self.offset
             self.window.blit(sprite.image, offset_pos)

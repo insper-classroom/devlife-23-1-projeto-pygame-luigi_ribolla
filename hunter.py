@@ -7,6 +7,7 @@ class Hunter(pg.sprite.Sprite):
         hunter = pg.image.load('docs/assets/img/hunter.png').convert_alpha()
         self.image = pg.transform.scale(hunter, (38, 38))
         self.rect = self.image.get_rect(topleft = posicao) 
+        self.hitbox = self.rect.inflate(0, -10)
         
         self.direcao = pg.math.Vector2() # vetor de direção
         self.vel = 5
@@ -33,26 +34,27 @@ class Hunter(pg.sprite.Sprite):
         if self.direcao.magnitude() != 0: # se o vetor não for nulo
             self.direcao = self.direcao.normalize() # normaliza o vetor
         
-        self.rect.x += self.direcao.x * vel
+        self.hitbox.x += self.direcao.x * vel
         self.collision("x")
-        self.rect.y += self.direcao.y * vel
+        self.hitbox.y += self.direcao.y * vel
         self.collision("y")
+        self.rect.center = self.hitbox.center
 
     def collision(self, direcao):
         if direcao == "x":
             for objeto in self.objetos:
-                if objeto.rect.colliderect(self.rect):
+                if objeto.hitbox.colliderect(self.hitbox):
                     if self.direcao.x > 0: # se estiver indo para a direita
-                        self.rect.right = objeto.rect.left
+                        self.hitbox.right = objeto.hitbox.left
                     elif self.direcao.x < 0: # se estiver indo para a esquerda
-                        self.rect.left = objeto.rect.right
+                        self.hitbox.left = objeto.hitbox.right
         if direcao == "y":
             for objeto in self.objetos:
-                if objeto.rect.colliderect(self.rect):
+                if objeto.hitbox.colliderect(self.hitbox):
                     if self.direcao.y > 0: # se estiver indo para baixo
-                        self.rect.bottom = objeto.rect.top
+                        self.hitbox.bottom = objeto.hitbox.top
                     elif self.direcao.y < 0: # se estiver indo para cima
-                        self.rect.top = objeto.rect.bottom
+                        self.hitbox.top = objeto.hitbox.bottom
 
     def desenha(self):
         self.input()

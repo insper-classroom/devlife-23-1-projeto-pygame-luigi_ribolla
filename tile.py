@@ -9,3 +9,4 @@ class Tile(pg.sprite.Sprite):
         image = pg.image.load('docs/assets/img/rock.png').convert_alpha()
         self.image = pg.transform.scale(image, (75, 87)).convert_alpha()
         self.rect = self.image.get_rect(topleft=posicao)
+        self.hitbox = self.rect.inflate(0, -30)
