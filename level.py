@@ -9,6 +9,7 @@ class Level:
 
         # guarda a janela
         self.window = pg.display.get_surface()
+        self.fogo = pg.image.load('docs/assets/img/fogo.png')
 
         # seta as sprites
         self.sprites = CameraY()
