@@ -3,16 +3,16 @@ import sys
 from constantes import *
 from tile import Tile
 from hunter import Hunter
+from fire import Fire
 
 class Level:
     def __init__(self):
 
         # guarda a janela
         self.window = pg.display.get_surface()
-        self.fogo = pg.image.load('docs/assets/img/fogo.png')
 
         # seta as sprites
-        self.sprites = CameraY()
+        self.sprites = Camera()
         self.objetos = pg.sprite.Group()
 
         self.mapa()
@@ -26,21 +26,29 @@ class Level:
                     Tile((x, y), [self.sprites, self.objetos])
                 if coluna == 'h':
                     self.hunter = Hunter((x, y), [self.sprites], self.objetos)
+                if coluna == 'f':
+                    self.fogo = Fire((x, y), [self.sprites, self.objetos])
 
     def desenha(self):
-        self.sprites.custom_draw()
+        self.sprites.custom_draw(self.hunter)
         self.sprites.update()
         self.hunter.desenha()
 
-class CameraY(pg.sprite.Group):
+class Camera(pg.sprite.Group):
     def __init__(self):
     
         super().__init__()
         self.window = pg.display.get_surface()
-        self.offset = pg.math.Vector2(0,0)
+        self.half_width = self.window.get_size()[0] // 2
+        self.half_height = self.window.get_size()[1] // 2
+        self.offset = pg.math.Vector2()
 
 
-    def custom_draw(self):
+    def custom_draw(self, player):
+
+        self.offset.x = player.rect.centerx - self.half_width
+        self.offset.y = player.rect.centery - self.half_height
+        
         for sprite in self.sprites():
-            offset_pos = sprite.rect.topleft + self.offset
+            offset_pos = sprite.rect.topleft - self.offset
             self.window.blit(sprite.image, offset_pos)

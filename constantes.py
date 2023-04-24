@@ -1,7 +1,7 @@
 LARGURA = 1200
 ALTURA = 610
 FPS = 60
-TAMANHO_TILE = 64
+TAMANHO_TILE = 80
 
 MAPA = [
 ['x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x'],
@@ -27,3 +27,11 @@ MAPA = [
 ['x','x','x','x','x','x',' ',' ',' ',' ',' ',' ','x','x','x','x','x','x','x','x'],
 ]
 
+# imagem hunter, indice:
+# hunter(Direcao,açao)     exemplo: hunter(D,)   --  Azul, Direita, 1
+
+# imagem fogo, indice:
+# fogo(Cor,Direcao,açao)     exemplo: fogo(A,D,1)   --  Azul, Direita, 1
+
+# imagem Zumbi, indice:
+# zumbi(Estado Vital,Direcao,açao)     exemplo: zumbi(M,D,1)   --  Morto, Direita, 1

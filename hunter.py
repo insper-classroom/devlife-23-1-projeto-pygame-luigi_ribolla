@@ -5,7 +5,7 @@ class Hunter(pg.sprite.Sprite):
     def __init__(self, posicao, grupos, objetos):
         super().__init__(grupos)
         hunter = pg.image.load('docs/assets/img/hunter.png').convert_alpha()
-        self.image = pg.transform.scale(hunter, (35, 35))
+        self.image = pg.transform.scale(hunter, (38, 38))
         self.rect = self.image.get_rect(topleft = posicao) 
         
         self.direcao = pg.math.Vector2() # vetor de direção
