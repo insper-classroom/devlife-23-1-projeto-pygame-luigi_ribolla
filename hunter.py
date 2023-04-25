@@ -6,7 +6,7 @@ class Hunter(pg.sprite.Sprite):
         super().__init__(grupos)
         hunter = pg.image.load('docs/assets/img/hunter.png').convert_alpha()
         self.image = pg.transform.scale(hunter, (38, 38))
-        self.rect = self.image.get_rect(topleft = posicao) 
+        self.rect = self.image.get_rect(topleft = posicao)
         self.hitbox = self.rect.inflate(0, -10)
         
         self.direcao = pg.math.Vector2() # vetor de direção

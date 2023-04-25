@@ -8,7 +8,7 @@ class Jogo:
 
         # Inicializa o pygame
         pg.init()
-        pg.display.set_caption('Hitto')
+        pg.display.set_caption('Desolation')
         self.window = pg.display.set_mode((LARGURA, ALTURA))
         self.level = Level()
         self.timer = pg.time.Clock()
