@@ -29,9 +29,9 @@ class Level:
                         x = index_coluna * TAMANHO_TILE
                         y = index_linha * TAMANHO_TILE
                         if style == "limite":
-                            Tile((x,y), [self.sprites, self.objetos], 'invisivel')
+                            Tile((x,y), [ self.objetos], 'invisivel')
         
-        
+
         
         self.hunter = Hunter((1800,2800), [self.sprites], self.objetos)
 
