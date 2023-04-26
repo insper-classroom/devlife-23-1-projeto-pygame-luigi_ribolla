@@ -64,5 +64,3 @@ class Hunter(pg.sprite.Sprite):
     def desenha(self):
         self.input()
         self.move(self.vel)
-
- 

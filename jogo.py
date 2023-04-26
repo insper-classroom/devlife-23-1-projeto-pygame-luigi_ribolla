@@ -20,7 +20,7 @@ class Jogo:
                     pg.quit()
                     sys.exit()
 
-            self.window.fill((255,255,255))
+            self.window.fill((0,0,0))
             self.level.desenha()
             pg.display.update()
             self.timer.tick(FPS)
