@@ -3,7 +3,7 @@ import sys
 from constantes import *
 from tile import Tile
 from hunter import Hunter
-
+from settings import *
 
 f = open("mapa_Camada de Blocos 1.csv", "r")
 linhas = f.read().split('\n')
@@ -78,6 +78,3 @@ class Camera(pg.sprite.Group):
             offset_pos = sprite.rect.topleft - self.offset
             self.window.blit(sprite.image, offset_pos)
 
-
-
-# reverse = lambda x: 1 if x==2 else 2
