@@ -5,6 +5,20 @@ from tile import Tile
 from hunter import Hunter
 # from fire import Fire
 
+f = open("mapa_Camada de Blocos 1.csv", "r")
+linhas = f.read().split('\n')
+matriz = []
+for linha in linhas:
+    matriz.append(linha.replace(' ','').split(','))
+f.close()
+print(matriz)
+matriz = matriz[:-1]
+for linha in matriz:
+    for i in range(len(linha)):
+        linha[i] = int(linha[i])
+print(matriz)
+
+
 class Level:
     def __init__(self):
 
@@ -43,9 +57,9 @@ class Camera(pg.sprite.Group):
         self.offset = pg.math.Vector2()
 
         floor = pg.image.load(('docs/assets/img/mapa.png')).convert()
-        # 
+        # transforma a escala do mapa 4x maior
 
-        self.floor = pg.transform.scale(floor,(3648,6080))
+        self.floor = pg.transform.scale(floor, (floor.get_width() * 3, floor.get_height() * 3))
         self.floor_rect = self.floor.get_rect(topleft = (0,0))
 
 
