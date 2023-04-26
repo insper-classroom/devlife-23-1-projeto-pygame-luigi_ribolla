@@ -5,20 +5,6 @@ from tile import Tile
 from hunter import Hunter
 from settings import *
 
-f = open("mapa_Camada de Blocos 1.csv", "r")
-linhas = f.read().split('\n')
-matriz = []
-for linha in linhas:
-    matriz.append(linha.replace(' ','').split(','))
-f.close()
-print(matriz)
-matriz = matriz[:-1]
-for linha in matriz:
-    for i in range(len(linha)):
-        linha[i] = int(linha[i])
-print(matriz)
-
-
 class Level:
     def __init__(self):
 
@@ -32,17 +18,22 @@ class Level:
         self.mapa()
 
     def mapa(self):
-        layout = {
-            "limites": import_csv_layout(), 
+        layouts = {
+            "limite": import_csv_layout('docs/csv-map/parede.csv'), 
+
         }
-    #     for index_linha, linha in enumerate(MAPA):
-    #         for index_coluna, coluna in enumerate(linha):
-    #             x = index_coluna * TAMANHO_TILE
-    #             y = index_linha * TAMANHO_TILE
-    #             if coluna == 'x':
-    #                 Tile((x, y), [self.sprites, self.objetos])
-    #             if coluna == 'h':
-        self.hunter = Hunter((2410,4190), [self.sprites], self.objetos)
+        for style, layout in layouts.items():
+            for index_linha, linha in enumerate(layout):
+                for index_coluna, coluna in enumerate(linha):
+                    if coluna != '-1':
+                        x = index_coluna * TAMANHO_TILE
+                        y = index_linha * TAMANHO_TILE
+                        if style == "limite":
+                            Tile((x,y), [self.sprites, self.objetos], 'invisivel')
+        
+        
+        
+        self.hunter = Hunter((1800,2800), [self.sprites], self.objetos)
 
 
     def desenha(self):
@@ -60,12 +51,11 @@ class Camera(pg.sprite.Group):
         self.offset = pg.math.Vector2()
 
         floor = pg.image.load(('docs/assets/img/mapa.png')).convert()
-        # transforma a escala do mapa 4x maior
 
         self.floor = pg.transform.scale(floor, (floor.get_width() * 3, floor.get_height() * 3))
         self.floor_rect = self.floor.get_rect(topleft = (0,0))
-
-
+# floor.get_width() * 2, floor.get_height() * 2
+# 96 , 160
     def custom_draw(self, player):
 
         self.offset.x = player.rect.centerx - self.half_width
