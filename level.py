@@ -25,7 +25,7 @@ class Level:
     #             if coluna == 'x':
     #                 Tile((x, y), [self.sprites, self.objetos])
     #             if coluna == 'h':
-        self.hunter = Hunter((1500, 1000), [self.sprites], self.objetos)
+        self.hunter = Hunter((2410,4190), [self.sprites], self.objetos)
 
 
     def desenha(self):
@@ -42,8 +42,10 @@ class Camera(pg.sprite.Group):
         self.half_height = self.window.get_size()[1] // 2
         self.offset = pg.math.Vector2()
 
-        floor = pg.image.load(('docs/assets/img/map.png')).convert()
-        self.floor = pg.transform.scale(floor, (4750, 4750))
+        floor = pg.image.load(('docs/assets/img/mapa.png')).convert()
+        # 
+
+        self.floor = pg.transform.scale(floor,(3648,6080))
         self.floor_rect = self.floor.get_rect(topleft = (0,0))
 
 

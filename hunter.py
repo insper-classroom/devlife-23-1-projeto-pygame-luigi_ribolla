@@ -29,6 +29,11 @@ class Hunter(pg.sprite.Sprite):
             self.direcao.x = -1
         else:
             self.direcao.x = 0
+        
+        if tecla[pg.K_r]:
+            self.vel = 8
+        else:
+            self.vel = 5
 
     def move(self,vel):
         if self.direcao.magnitude() != 0: # se o vetor não for nulo
