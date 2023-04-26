@@ -3,7 +3,7 @@ import sys
 from constantes import *
 from tile import Tile
 from hunter import Hunter
-# from fire import Fire
+
 
 f = open("mapa_Camada de Blocos 1.csv", "r")
 linhas = f.read().split('\n')
@@ -29,9 +29,12 @@ class Level:
         self.sprites = Camera()
         self.objetos = pg.sprite.Group()
 
-        # self.mapa()
+        self.mapa()
 
-    # def mapa(self):
+    def mapa(self):
+        layout = {
+            "limites": import_csv_layout(), 
+        }
     #     for index_linha, linha in enumerate(MAPA):
     #         for index_coluna, coluna in enumerate(linha):
     #             x = index_coluna * TAMANHO_TILE
