@@ -30,7 +30,7 @@
 .topnav a.active {
   background-color: rgb(43,40,40);
   color: white;
-  margin-left: 250px;
+  margin-left: 170px;
 }
 
 
@@ -51,6 +51,7 @@ body{
   margin-right: 0px;
   margin-bottom: 0px;
   background-color: rgb(12, 12, 12);
+  overflow-x: hidden;
 }
   
 /* Modelagem do título no site */
@@ -163,7 +164,7 @@ footer {
 margin-top: 50px;
 background-color: #322f2f;
 color: #fff;
-padding: 20px;
+padding: 18px;
 position: relative;
 bottom: 0;
 width: 100%;
