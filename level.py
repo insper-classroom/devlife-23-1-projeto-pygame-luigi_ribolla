@@ -4,6 +4,7 @@ from constantes import *
 from tile import Tile
 from hunter import Hunter
 from settings import *
+from random import choice
 
 class Level:
     def __init__(self):
@@ -20,8 +21,11 @@ class Level:
     def mapa(self):
         layouts = {
             "limite": import_csv_layout('docs/csv-map/parede.csv'), 
-
+            # "detalhes": import_csv_layout('docs/csv-map/detalhes.csv'),
         }
+        # graficos = {
+        #     "detalhes": import_img('docs/assets/img/detalhes.png'),
+        # }
         for style, layout in layouts.items():
             for index_linha, linha in enumerate(layout):
                 for index_coluna, coluna in enumerate(linha):
@@ -30,9 +34,11 @@ class Level:
                         y = index_linha * TAMANHO_TILE
                         if style == "limite":
                             Tile((x,y), [ self.objetos], 'invisivel')
-        
-
-        
+                        # if style == "detalhes":
+                        #     tipo = choice(graficos['detalhes'])
+                        #     imagem = pg.transform.scale(tipo, (TAMANHO_TILE, TAMANHO_TILE))
+                        #     Tile((x,y), [ self.objetos], 'detalhes', imagem)
+    
         self.hunter = Hunter((1800,2800), [self.sprites], self.objetos)
 
 
