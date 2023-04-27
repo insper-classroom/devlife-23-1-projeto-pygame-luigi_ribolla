@@ -1,31 +1,62 @@
 import pygame as pg
 from constantes import *
+from settings import *
 
 class Hunter(pg.sprite.Sprite):
     def __init__(self, posicao, grupos, objetos):
         super().__init__(grupos)
-        hunter = pg.image.load('docs/assets/img/hunter.png').convert_alpha()
-        self.image = pg.transform.scale(hunter, (TAMANHO_TILE, TAMANHO_TILE))
-        self.rect = self.image.get_rect(topleft = posicao)
-        self.hitbox = self.rect.inflate(0, -10)
-
+        
+        self.idle = True
+        self.index = 0
+        self.timer = 600
+        self.tempo = pg.time.get_ticks()
+        
         # animação
         self.hunter_assets()
 
         # movimentação
         self.direcao = pg.math.Vector2() # vetor de direção
         self.vel = 5
-        self.ataque = False
-        self.ataque_cooldown = 400
-        self.ataque_tempo = None
-
-        self.objetos = objetos
         
+        self.objetos = objetos
+        # indica se o jogador está atacando
+        self.ataque = False
+        self.ataque_tempo = pg.time.get_ticks()
+        
+        image = self.animations['idle'][self.index].convert_alpha()
+        self.image = pg.transform.scale(image, (48, 72))
+        
+        self.rect = self.image.get_rect(topleft = posicao)
+        self.hitbox = self.rect.inflate(0, -10)
+
+
     def hunter_assets(self):
-        hunter_path = 'docs/assets/img/hunter/'
+        
+        hunter_sprites = "docs/assets/img/hunter/"
+        
         self.animations = {'cima': [], 'baixo': [], 'esquerda': [], 'direita': [],
+                           
+                           'idle': [],
+                           
                            'cima_ataque': [], 'baixo_ataque': [], 'esquerda_ataque': [], 'direita_ataque': [],
+
                            'cima_base': [], 'baixo_base': [], 'esquerda_base': [], 'direita_base': [],}
+                    
+        if self.idle:
+            for i in range(6):
+                imagem = pg.image.load('docs/assets/img/hunter/idle.png').subsurface([0, i * 24],[16, 24])
+                self.animations['idle'].append(imagem)
+                    
+            t0 = pg.time.get_ticks()
+            
+            if t0 - self.tempo >= self.timer:
+                self.index += 1
+                self.tempo = t0
+
+                if self.index >= len(self.animations['idle']):
+                    self.index = 0
+               
+            self.image = self.animations['idle'][self.index]
 
     def input(self):
         tecla = pg.key.get_pressed()
@@ -69,6 +100,8 @@ class Hunter(pg.sprite.Sprite):
         self.collision("y")
         self.rect.center = self.hitbox.center
 
+
+
     def collision(self, direcao):
         if direcao == "x":
             for objeto in self.objetos:
@@ -88,7 +121,7 @@ class Hunter(pg.sprite.Sprite):
     def cooldown(self):
         t0 = pg.time.get_ticks()
         if self.ataque:
-            if t0 - self.ataque_tempo >= self.ataque_cooldown:
+            if t0 - self.ataque_tempo >= self.cooldown:
                 self.ataque = False
 
     def desenha(self):
