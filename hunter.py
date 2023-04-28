@@ -5,57 +5,58 @@ from settings import *
 class Hunter(pg.sprite.Sprite):
     def __init__(self, posicao, grupos, objetos):
         super().__init__(grupos)
-        
+
         self.idle = True
         self.index = 0
         self.timer = 600
         self.tempo = pg.time.get_ticks()
-        
+
         # animação
         self.hunter_assets()
 
         # movimentação
         self.direcao = pg.math.Vector2() # vetor de direção
         self.vel = 5
-        
+
+
         self.objetos = objetos
         # indica se o jogador está atacando
         self.ataque = False
         self.ataque_tempo = pg.time.get_ticks()
-        
+
         image = self.animations['idle'][self.index].convert_alpha()
         self.image = pg.transform.scale(image, (48, 72))
-        
+
         self.rect = self.image.get_rect(topleft = posicao)
         self.hitbox = self.rect.inflate(0, -10)
 
 
     def hunter_assets(self):
-        
+
         hunter_sprites = "docs/assets/img/hunter/"
-        
+
         self.animations = {'cima': [], 'baixo': [], 'esquerda': [], 'direita': [],
-                           
+
                            'idle': [],
-                           
+
                            'cima_ataque': [], 'baixo_ataque': [], 'esquerda_ataque': [], 'direita_ataque': [],
 
                            'cima_base': [], 'baixo_base': [], 'esquerda_base': [], 'direita_base': [],}
-                    
+
         if self.idle:
             for i in range(6):
                 imagem = pg.image.load('docs/assets/img/hunter/idle.png').subsurface([0, i * 24],[16, 24])
                 self.animations['idle'].append(imagem)
-                    
+
             t0 = pg.time.get_ticks()
-            
+
             if t0 - self.tempo >= self.timer:
                 self.index += 1
                 self.tempo = t0
 
                 if self.index >= len(self.animations['idle']):
                     self.index = 0
-               
+
             self.image = self.animations['idle'][self.index]
 
     def input(self):
@@ -76,9 +77,9 @@ class Hunter(pg.sprite.Sprite):
             self.direcao.x = 0
         
         if tecla[pg.K_r]:
-            self.vel = 8
+            self.vel = 6
         else:
-            self.vel = 5
+            self.vel = 4
 
         # ataque
         if tecla[pg.K_SPACE] and not self.ataque:
