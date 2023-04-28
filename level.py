@@ -33,19 +33,19 @@ class Level:
                         x = index_coluna * TAMANHO_TILE
                         y = index_linha * TAMANHO_TILE
                         if style == "limite":
-                            Tile((x,y), [ self.objetos], 'invisivel')
+                            Tile((x,y), [self.objetos], 'invisivel')
                         # if style == "detalhes":
                         #     tipo = choice(graficos['detalhes'])
                         #     imagem = pg.transform.scale(tipo, (TAMANHO_TILE, TAMANHO_TILE))
                         #     Tile((x,y), [ self.objetos], 'detalhes', imagem)
     
-        self.hunter = Hunter((1800,2800), [self.sprites], self.objetos)
+        self.hunter = Hunter((1800,2800), self.sprites, self.objetos)
 
 
     def desenha(self):
         self.sprites.custom_draw(self.hunter)
         self.sprites.update()
-        self.hunter.desenha()
+        self.hunter.desenha(self.window)
 
 class Camera(pg.sprite.Group):
     def __init__(self):
@@ -73,4 +73,5 @@ class Camera(pg.sprite.Group):
         for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
             offset_pos = sprite.rect.topleft - self.offset
             self.window.blit(sprite.image, offset_pos)
+
 

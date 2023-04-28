@@ -7,6 +7,7 @@ class Hunter(pg.sprite.Sprite):
         super().__init__(grupos)
 
         self.idle = True
+        self.ataque = False
         self.index = 0
         self.timer = 600
         self.tempo = pg.time.get_ticks()
@@ -21,43 +22,37 @@ class Hunter(pg.sprite.Sprite):
 
         self.objetos = objetos
         # indica se o jogador está atacando
-        self.ataque = False
         self.ataque_tempo = pg.time.get_ticks()
-
-        image = self.animations['idle'][self.index].convert_alpha()
-        self.image = pg.transform.scale(image, (48, 72))
+        self.cooldown_atk = 5000
 
         self.rect = self.image.get_rect(topleft = posicao)
         self.hitbox = self.rect.inflate(0, -10)
+        self.frame = 0
 
 
     def hunter_assets(self):
 
         hunter_sprites = "docs/assets/img/hunter/"
 
-        self.animations = {'cima': [], 'baixo': [], 'esquerda': [], 'direita': [],
+        self.animations = {'esquerda': [], 'direita': [],
 
                            'idle': [],
 
-                           'cima_ataque': [], 'baixo_ataque': [], 'esquerda_ataque': [], 'direita_ataque': [],
+                           'esquerda_ataque': [], 'direita_ataque': [],
 
-                           'cima_base': [], 'baixo_base': [], 'esquerda_base': [], 'direita_base': [],}
+                           'esquerda_base': [], 'direita_base': [],}
 
-        if self.idle:
-            for i in range(6):
-                imagem = pg.image.load('docs/assets/img/hunter/idle.png').subsurface([0, i * 24],[16, 24])
-                self.animations['idle'].append(imagem)
+        for i in range(6):
+            imagem = pg.image.load('docs/assets/img/hunter/idle.png').subsurface([0, i * 24],[16, 24])
+            self.animations['idle'].append(imagem)
 
-            t0 = pg.time.get_ticks()
+        self.image = self.animations['idle'][self.index]
 
-            if t0 - self.tempo >= self.timer:
-                self.index += 1
-                self.tempo = t0
+        for i in range(7):
+            imagem = pg.image.load('docs/assets/img/hunter/attack.png').subsurface([0, i * 21],[31, 21])
+            self.animations['direita_ataque'].append(imagem)
 
-                if self.index >= len(self.animations['idle']):
-                    self.index = 0
-
-            self.image = self.animations['idle'][self.index]
+        self.image = self.animations['direita_ataque'][self.index]
 
     def input(self):
         tecla = pg.key.get_pressed()
@@ -80,6 +75,11 @@ class Hunter(pg.sprite.Sprite):
             self.vel = 6
         else:
             self.vel = 4
+    
+        if self.ataque:
+            self.idle = False
+        else:
+            self.idle = True
 
         # ataque
         if tecla[pg.K_SPACE] and not self.ataque:
@@ -101,8 +101,6 @@ class Hunter(pg.sprite.Sprite):
         self.collision("y")
         self.rect.center = self.hitbox.center
 
-
-
     def collision(self, direcao):
         if direcao == "x":
             for objeto in self.objetos:
@@ -119,13 +117,29 @@ class Hunter(pg.sprite.Sprite):
                     elif self.direcao.y < 0: # se estiver indo para cima
                         self.hitbox.top = objeto.hitbox.bottom
 
-    def cooldown(self):
-        t0 = pg.time.get_ticks()
-        if self.ataque:
-            if t0 - self.ataque_tempo >= self.cooldown:
-                self.ataque = False
+    # def cooldown(self):
+    #     t0 = pg.time.get_ticks()
+    #     if t0 - self.ataque_tempo >= self.cooldown_atk:
+    #         self.ataque = False
 
-    def desenha(self):
+    def desenha(self, window: pg.Surface):
         self.input()
-        self.cooldown()
         self.move(self.vel)
+        # self.cooldown()  # chama o método cooldown antes de verificar o ataque
+        if self.idle:
+            self.image = self.animations['idle'][int(self.frame % len(self.animations['idle']))]
+            self.image = pg.transform.scale(self.image, (48, 72))
+            self.frame += 0.12
+        
+        if self.ataque:
+            if self.frame >= len(self.animations['direita_ataque']):
+                self.frame = 0
+                self.ataque = False
+            self.image = self.animations['direita_ataque'][int(self.frame)]
+            self.image = pg.transform.scale(self.image, (96, 72))
+            self.frame += 0.17
+            
+
+        pg.display.update()
+
+
