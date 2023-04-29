@@ -42,7 +42,7 @@ class Hunter(pg.sprite.Sprite):
 
                            'esquerda_base': [], 'direita_base': [],}
 
-        for i in range(6):
+        for i in range(4):
             imagem = pg.image.load('docs/assets/img/hunter/idle.png').subsurface([0, i * 24],[16, 24])
             self.animations['idle'].append(imagem)
 

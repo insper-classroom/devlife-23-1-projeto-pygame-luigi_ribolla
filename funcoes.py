@@ -27,6 +27,11 @@ class Mapa:
         img = pg.image.load("docs/assets/img/backg.png")
         self.map = pg.transform.scale(img,(800,600))
 
+class Inicio:
+    def __init__(self):
+        img = pg.image.load("docs/assets/img/tela_inicio2.png")
+        self.inicio = pg.transform.scale(img,(800,600))
+
 class Player:
     def __init__(self):
         self.sprites = {
