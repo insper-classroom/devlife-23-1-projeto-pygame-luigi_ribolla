@@ -5,7 +5,6 @@ from level import Level
 
 class Jogo:
     def __init__(self):
-
         # Inicializa o pygame
         pg.init()
         pg.display.set_caption('Desolation')

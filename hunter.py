@@ -5,85 +5,137 @@ from settings import *
 class Hunter(pg.sprite.Sprite):
     def __init__(self, posicao, grupos, objetos):
         super().__init__(grupos)
+        self.image = pg.image.load('docs/assets/img/hunter/idle.png').convert_alpha()
+        self.rect = self.image.get_rect(center = posicao)
+        self.hitbox = self.rect.inflate(0, -20)
 
-        self.idle = True
-        self.ataque = False
+        # sprites
+        self.sptites()
+        self.estado = 'baixo'
         self.index = 0
-        self.timer = 600
-        self.tempo = pg.time.get_ticks()
-
-        # animação
-        self.hunter_assets()
+        self.frame = 0.15
 
         # movimentação
-        self.direcao = pg.math.Vector2() # vetor de direção
+        self.direcao = pg.math.Vector2()
         self.vel = 5
-
+        self.ataque = False
+        self.ataque_cooldown = 600
+        self.ataque_timer = None
 
         self.objetos = objetos
-        # indica se o jogador está atacando
-        self.ataque_tempo = pg.time.get_ticks()
-        self.cooldown_atk = 5000
-        hunter = self.animations['idle'][0]
-        self.image = pg.transform.scale(hunter, (TAMANHO_TILE, TAMANHO_TILE))
+
+    def sptites(self):
+        pasta = 'docs/assets/img/hunter/'
         
-        self.rect = self.image.get_rect(topleft = posicao)
-        self.hitbox = self.rect.inflate(0, -10)
+        self.imagens = {
+            "idle": (pasta + 'idle.png'),
+            "attack": (pasta + 'attack.png'),
+            "walk": (pasta + 'walk.png'),
+        }
+        self.animations = {
+            'idle_baixo': [], 'idle_cima': [], 'idle_esquerda': [], 'idle_direita': [],
+            'attack_baixo': [], 'attack_cima': [], 'attack_esquerda': [], 'attack_direita': [],
+            'baixo': [], 'cima': [], 'esquerda': [], 'direita': [],
+        }
 
-
-    def hunter_assets(self):
-
-        hunter_sprites = "docs/assets/img/hunter/"
-
-        self.animations = {'esquerda': [], 'direita': [],
-
-                           'idle': [],
-
-                           'esquerda_ataque': [], 'direita_ataque': [],
-
-                           'esquerda_base': [], 'direita_base': [],}
-        for i in range(6):
-            imagem = pg.image.load('docs/assets/img/hunter/idle.png').subsurface([0, i * 24],[16, 24])
-            self.animations['idle'].append(imagem)
-
-        self.image = self.animations['idle'][self.index]
+        for sprite in self.imagens.keys():
+            if sprite == 'idle':
+                baixo = pg.image.load(self.imagens['idle']).subsurface([0, 0],[16, 16])
+                self.animations['idle_baixo'].append(baixo)
+                
+                cima = pg.image.load(self.imagens['idle']).subsurface([16, 0],[16, 16])
+                self.animations['idle_cima'].append(cima)
+                
+                esquerda = pg.image.load(self.imagens['idle']).subsurface([32, 0],[16, 16])
+                self.animations['idle_esquerda'].append(esquerda)
+                
+                direita = pg.image.load(self.imagens['idle']).subsurface([48, 0],[16, 16])  
+                self.animations['idle_direita'].append(direita)
+                
+                
+            elif sprite == 'attack':
+                baixo = pg.image.load(self.imagens['attack']).subsurface([0, 0],[16, 16])
+                self.animations['attack_baixo'].append(baixo)
+                
+                cima = pg.image.load(self.imagens['attack']).subsurface([16, 0],[16, 16])
+                self.animations['attack_cima'].append(cima)
+                
+                esquerda = pg.image.load(self.imagens['attack']).subsurface([32, 0],[16, 16])
+                self.animations['attack_esquerda'].append(esquerda)
+                
+                direita = pg.image.load(self.imagens['attack']).subsurface([48, 0],[16, 16])  
+                self.animations['attack_direita'].append(direita)
+                
+                
+            elif sprite == 'walk':
+                for i in range(4):
+                    baixo = pg.image.load(self.imagens['walk']).subsurface([0, i*16],[16, 16])
+                    self.animations['baixo'].append(baixo)
+                    
+                    cima = pg.image.load(self.imagens['walk']).subsurface([16, i*16],[16, 16])
+                    self.animations['cima'].append(cima)
+                    
+                    esquerda = pg.image.load(self.imagens['walk']).subsurface([32, i*16],[16, 16])
+                    self.animations['esquerda'].append(esquerda)
+                    
+                    direita = pg.image.load(self.imagens['walk']).subsurface([48, i*16],[16, 16])  
+                    self.animations['direita'].append(direita)
 
     def input(self):
         tecla = pg.key.get_pressed()
-        # movimentação
+        
+        # movimentação 
         if tecla[pg.K_w]:
             self.direcao.y = -1 
+            self.estado = 'cima'
+        
         elif tecla[pg.K_s]:
             self.direcao.y = 1
+            self.estado = 'baixo'
+        
         else:
             self.direcao.y = 0
         
         if tecla[pg.K_d]:
             self.direcao.x = 1
+            self.estado = 'direita'
+        
         elif tecla[pg.K_a]:
             self.direcao.x = -1
+            self.estado = 'esquerda'
+        
         else:
             self.direcao.x = 0
-        
-        if tecla[pg.K_r]:
-            self.vel = 6
-        else:
-            self.vel = 4
-    
-        if self.ataque:
-            self.idle = False
-        else:
-            self.idle = True
 
         # ataque
         if tecla[pg.K_SPACE] and not self.ataque:
             self.ataque = True
-            self.ataque_tempo = pg.time.get_ticks()
+            self.ataque_timer = pg.time.get_ticks()
 
         # poder
-        if tecla[pg.K_LSHIFT]and not self.magia:
-            self.magia = True
-            self.ataque_tempo = pg.time.get_ticks()
+        if tecla[pg.K_LSHIFT]and not self.ataque:
+            self.ataque = True
+            self.ataque_timer = pg.time.get_ticks()
+
+    def update_estado(self):
+        #idle
+        if self.direcao.x == 0 and self.direcao.y == 0:
+            if not 'idle' in self.estado and not 'attack' in self.estado:
+                self.estado = 'idle_' + self.estado
+
+        # ataque
+        if self.ataque:
+            self.direcao.x = 0
+            self.direcao.y = 0
+            if not 'attack' in self.estado:
+                if 'idle' in self.estado:
+                    self.estado.replace('idle_', 'attack_')
+                else:
+                    self.estado = 'attack_' + self.estado
+
+        else: 
+            if 'attack' in self.estado:
+                self.estado.replace('attack_', '')
 
     def move(self,vel):
         if self.direcao.magnitude() != 0: # se o vetor não for nulo
@@ -111,13 +163,27 @@ class Hunter(pg.sprite.Sprite):
                     elif self.direcao.y < 0: # se estiver indo para cima
                         self.hitbox.top = objeto.hitbox.bottom
 
-    # def cooldown(self):
-    #     t0 = pg.time.get_ticks()
-    #     if t0 - self.ataque_tempo >= self.cooldown_atk:
-    #         self.ataque = False
+    def cooldown(self):
+        tempo_atual = pg.time.get_ticks()
+        if self.ataque:
+            if tempo_atual - self.ataque_timer >= self.ataque_cooldown:
+                self.ataque = False               
+
+    def animate(self):
+        animacao = self.animations[self.estado]
+
+        self.index += self.frame
+        if self.index >= len(animacao):
+            self.index = 0
+
+        image = animacao[int(self.index)]
+        self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
+        self.rect = self.image.get_rect(center = self.hitbox.center)
 
     def desenha(self):
         self.input()
+        self.cooldown() 
+        self.update_estado()
+        self.animate()
         self.move(self.vel)
-        # self.cooldown()  # chama o método cooldown antes de verificar o ataque
 
