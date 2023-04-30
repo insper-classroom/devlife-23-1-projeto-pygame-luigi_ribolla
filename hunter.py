@@ -94,48 +94,49 @@ class Hunter(pg.sprite.Sprite):
         tecla = pg.key.get_pressed()
         
         # movimentação 
-        if tecla[pg.K_w]:
-            self.direcao.y = -1 
-            self.estado = 'cima'
-        
-        elif tecla[pg.K_s]:
-            self.direcao.y = 1
-            self.estado = 'baixo'
-        
-        else:
-            self.direcao.y = 0
-        
-        if tecla[pg.K_d]:
-            self.direcao.x = 1
-            self.estado = 'direita'
-        
-        elif tecla[pg.K_a]:
-            self.direcao.x = -1
-            self.estado = 'esquerda'
-        
-        else:
-            self.direcao.x = 0
+        if self.ataque == False:
+            if tecla[pg.K_w]:
+                self.direcao.y = -1 
+                self.estado = 'cima'
+            
+            elif tecla[pg.K_s]:
+                self.direcao.y = 1
+                self.estado = 'baixo'
+            
+            else:
+                self.direcao.y = 0
+            
+            if tecla[pg.K_d]:
+                self.direcao.x = 1
+                self.estado = 'direita'
+            
+            elif tecla[pg.K_a]:
+                self.direcao.x = -1
+                self.estado = 'esquerda'
+            
+            else:
+                self.direcao.x = 0
 
-        # ataque
-        if tecla[pg.K_SPACE] and not self.ataque:
-            self.ataque = True
-            self.ataque_timer = pg.time.get_ticks()
-            self.criar_ataque()
+            # ataque
+            if tecla[pg.K_SPACE]:
+                self.ataque = True
+                self.ataque_timer = pg.time.get_ticks()
+                self.criar_ataque()
 
-        # poder
-        if tecla[pg.K_LSHIFT]and not self.ataque:
-            self.ataque = True
-            self.ataque_timer = pg.time.get_ticks()
+            # poder
+            if tecla[pg.K_LSHIFT]:
+                self.ataque = True
+                self.ataque_timer = pg.time.get_ticks()
 
-        if tecla[pg.K_q] and self.pode_trocar_arma:
-            self.pode_trocar_arma = False
-            self.tempo_troca = pg.time.get_ticks()
-            if self.arma_index == 0:
-                self.arma_index = 1
-                self.arma = list(dados_arma.keys())[self.arma_index]
-            elif self.arma_index == 1:
-                self.arma_index = 0
-                self.arma = list(dados_arma.keys())[self.arma_index]
+            if tecla[pg.K_q] and self.pode_trocar_arma:
+                self.pode_trocar_arma = False
+                self.tempo_troca = pg.time.get_ticks()
+                if self.arma_index == 0:
+                    self.arma_index = 1
+                    self.arma = list(dados_arma.keys())[self.arma_index]
+                elif self.arma_index == 1:
+                    self.arma_index = 0
+                    self.arma = list(dados_arma.keys())[self.arma_index]
 
     def update_estado(self):
         #idle
@@ -147,7 +148,7 @@ class Hunter(pg.sprite.Sprite):
         if self.ataque:
             self.direcao.x = 0
             self.direcao.y = 0
-            if not 'attack' in self.estado:
+            if 'attack' not in self.estado:
                 if 'idle' in self.estado:
                     self.estado.replace('idle_', 'attack_')
                 else:

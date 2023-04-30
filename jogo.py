@@ -24,6 +24,6 @@ class Jogo:
             pg.display.update()
             self.timer.tick(FPS)
 
-if __name__ == '__main__':
+if __name__ == '__main__': 
     jogo = Jogo()
     jogo.desenha()

@@ -3,7 +3,10 @@ import pygame as pg
 class Arma(pg.sprite.Sprite):
     def __init__(self,hunter,grupos):
         super().__init__(grupos)
-        direcao = hunter.estado.split('_')[0]
+        if 'idle' in hunter.estado or 'attack' in hunter.estado:
+            direcao = hunter.estado.split('_')[1]
+        else:
+            direcao = hunter.estado.split('_')[0]
 
         #gráfico
         imagens_gerais = f'docs/assets/img/espadas/{hunter.arma}/{direcao}.png'
