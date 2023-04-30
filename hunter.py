@@ -24,10 +24,11 @@ class Hunter(pg.sprite.Sprite):
         # indica se o jogador está atacando
         self.ataque_tempo = pg.time.get_ticks()
         self.cooldown_atk = 5000
-
+        hunter = self.animations['idle'][0]
+        self.image = pg.transform.scale(hunter, (TAMANHO_TILE, TAMANHO_TILE))
+        
         self.rect = self.image.get_rect(topleft = posicao)
         self.hitbox = self.rect.inflate(0, -10)
-        self.frame = 0
 
 
     def hunter_assets(self):
@@ -41,18 +42,11 @@ class Hunter(pg.sprite.Sprite):
                            'esquerda_ataque': [], 'direita_ataque': [],
 
                            'esquerda_base': [], 'direita_base': [],}
-
-        for i in range(4):
+        for i in range(6):
             imagem = pg.image.load('docs/assets/img/hunter/idle.png').subsurface([0, i * 24],[16, 24])
             self.animations['idle'].append(imagem)
 
         self.image = self.animations['idle'][self.index]
-
-        for i in range(7):
-            imagem = pg.image.load('docs/assets/img/hunter/attack.png').subsurface([0, i * 21],[31, 21])
-            self.animations['direita_ataque'].append(imagem)
-
-        self.image = self.animations['direita_ataque'][self.index]
 
     def input(self):
         tecla = pg.key.get_pressed()
@@ -122,24 +116,8 @@ class Hunter(pg.sprite.Sprite):
     #     if t0 - self.ataque_tempo >= self.cooldown_atk:
     #         self.ataque = False
 
-    def desenha(self, window: pg.Surface):
+    def desenha(self):
         self.input()
         self.move(self.vel)
         # self.cooldown()  # chama o método cooldown antes de verificar o ataque
-        if self.idle:
-            self.image = self.animations['idle'][int(self.frame % len(self.animations['idle']))]
-            self.image = pg.transform.scale(self.image, (48, 72))
-            self.frame += 0.12
-        
-        if self.ataque:
-            if self.frame >= len(self.animations['direita_ataque']):
-                self.frame = 0
-                self.ataque = False
-            self.image = self.animations['direita_ataque'][int(self.frame)]
-            self.image = pg.transform.scale(self.image, (96, 72))
-            self.frame += 0.17
-            
-
-        pg.display.update()
-
 

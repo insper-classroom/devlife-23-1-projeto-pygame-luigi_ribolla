@@ -8,5 +8,8 @@ class Tile(pg.sprite.Sprite):
 
         self.tipo_sprite = tipo_sprite
         self.image = imagem
-        self.rect = self.image.get_rect(topleft=posicao)
-        self.hitbox = self.rect.inflate(0, -30)
+        if tipo_sprite == 'objeto':
+            self.rect = self.image.get_rect(topleft = (posicao[0],posicao[1] - TAMANHO_TILE))
+        else:
+            self.rect = self.image.get_rect(topleft = posicao)
+        self.hitbox = self.rect.inflate(0, -20)
