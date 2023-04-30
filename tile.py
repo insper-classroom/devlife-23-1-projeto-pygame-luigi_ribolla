@@ -12,4 +12,4 @@ class Tile(pg.sprite.Sprite):
             self.rect = self.image.get_rect(topleft = (posicao[0],posicao[1] - TAMANHO_TILE))
         else:
             self.rect = self.image.get_rect(topleft = posicao)
-        self.hitbox = self.rect.inflate(0, -20)
+        self.hitbox = self.rect

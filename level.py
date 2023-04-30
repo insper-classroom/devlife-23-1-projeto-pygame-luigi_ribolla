@@ -33,7 +33,7 @@ class Level:
                         x = index_coluna * TAMANHO_TILE
                         y = index_linha * TAMANHO_TILE
                         if style == "limite":
-                            Tile((x,y), [self.objetos], 'invisivel')
+                            Tile((x,y), ([self.objetos]), 'invisivel')
                         # if style == "detalhes":
                         #     tipo = choice(graficos['detalhes'])
                         #     imagem = pg.transform.scale(tipo, (TAMANHO_TILE, TAMANHO_TILE))

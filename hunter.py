@@ -7,7 +7,7 @@ class Hunter(pg.sprite.Sprite):
         super().__init__(grupos)
         self.image = pg.image.load('docs/assets/img/hunter/idle.png').convert_alpha()
         self.rect = self.image.get_rect(center = posicao)
-        self.hitbox = self.rect.inflate(0, -20)
+        self.hitbox = self.rect
 
         # sprites
         self.sptites()
