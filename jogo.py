@@ -1,7 +1,7 @@
 import pygame as pg
 import sys
 from constantes import *
-from level import Level
+from dungeon import Dungeon
 
 class Jogo:
     def __init__(self):
@@ -9,7 +9,7 @@ class Jogo:
         pg.init()
         pg.display.set_caption('Desolation')
         self.window = pg.display.set_mode((LARGURA, ALTURA))
-        self.level = Level()
+        self.dungeon = Dungeon()
         self.timer = pg.time.Clock()
 
     def desenha(self):
@@ -20,7 +20,7 @@ class Jogo:
                     sys.exit()
 
             self.window.fill((0,0,0))
-            self.level.desenha()
+            self.dungeon.desenha()
             pg.display.update()
             self.timer.tick(FPS)
 

@@ -169,7 +169,7 @@ class Hunter(pg.sprite.Sprite):
             if tempo_atual - self.ataque_timer >= self.ataque_cooldown:
                 self.ataque = False               
 
-    def animate(self):
+    def update_animacao(self):
         animacao = self.animations[self.estado]
 
         self.index += self.frame
@@ -184,6 +184,6 @@ class Hunter(pg.sprite.Sprite):
         self.input()
         self.cooldown() 
         self.update_estado()
-        self.animate()
+        self.update_animacao()
         self.move(self.vel)
 

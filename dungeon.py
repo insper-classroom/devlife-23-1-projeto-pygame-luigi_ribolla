@@ -1,12 +1,12 @@
 import pygame as pg
 import sys
 from constantes import *
-from tile import Tile
+from objetos import Objetos
 from hunter import Hunter
 from settings import *
 from random import choice
 
-class Level:
+class Dungeon:
     def __init__(self):
 
         # guarda a janela
@@ -20,12 +20,8 @@ class Level:
 
     def mapa(self):
         layouts = {
-            "limite": import_csv_layout('docs/csv-map/parede.csv'), 
-            # "detalhes": import_csv_layout('docs/csv-map/detalhes.csv'),
-        }
-        # graficos = {
-        #     "detalhes": import_img('docs/assets/img/detalhes.png'),
-        # }
+            "limite": importa_csv('docs/csv-map/parede.csv'), }
+        
         for style, layout in layouts.items():
             for index_linha, linha in enumerate(layout):
                 for index_coluna, coluna in enumerate(linha):
@@ -33,15 +29,10 @@ class Level:
                         x = index_coluna * TAMANHO_TILE
                         y = index_linha * TAMANHO_TILE
                         if style == "limite":
-                            Tile((x,y), ([self.objetos]), 'invisivel')
-                        # if style == "detalhes":
-                        #     tipo = choice(graficos['detalhes'])
-                        #     imagem = pg.transform.scale(tipo, (TAMANHO_TILE, TAMANHO_TILE))
-                        #     Tile((x,y), [ self.objetos], 'detalhes', imagem)
+                            Objetos((x,y), ([self.objetos]), 'invisivel')
     
         self.hunter = Hunter((1800,2800), [self.sprites], self.objetos)
-
-
+    
     def desenha(self):
         self.sprites.custom_draw(self.hunter)
         self.sprites.update()
@@ -61,8 +52,7 @@ class Camera(pg.sprite.Group):
 
         self.floor = pg.transform.scale(floor, (floor.get_width() * 3, floor.get_height() * 3))
         self.floor_rect = self.floor.get_rect(topleft = (0,0))
-# floor.get_width() * 2, floor.get_height() * 2
-# 96 , 160
+
     def custom_draw(self, player):
 
         self.offset.x = player.rect.centerx - self.half_width

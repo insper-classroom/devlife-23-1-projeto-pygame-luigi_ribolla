@@ -2,7 +2,7 @@
 import pygame as pg
 from constantes import *
 
-class Tile(pg.sprite.Sprite):
+class Objetos(pg.sprite.Sprite):
     def __init__(self,posicao,grupos, tipo_sprite, imagem = pg.Surface((TAMANHO_TILE, TAMANHO_TILE))):
         super().__init__(grupos)
 
