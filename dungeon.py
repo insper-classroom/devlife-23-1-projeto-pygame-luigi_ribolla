@@ -5,6 +5,7 @@ from objetos import Objetos
 from hunter import Hunter
 from settings import *
 from random import choice
+from arma import Arma
 
 class Dungeon:
     def __init__(self):
@@ -15,6 +16,9 @@ class Dungeon:
         # seta as sprites
         self.sprites = Camera()
         self.objetos = pg.sprite.Group()
+
+        #ataque
+        self.ataque_atual = None
 
         self.mapa()
 
@@ -31,7 +35,15 @@ class Dungeon:
                         if style == "limite":
                             Objetos((x,y), ([self.objetos]), 'invisivel')
     
-        self.hunter = Hunter((1800,2800), [self.sprites], self.objetos)
+        self.hunter = Hunter((1800,2800), [self.sprites], self.objetos,self.criar_ataque,self.apagar_ataque)
+
+    def criar_ataque(self):
+        self.ataque_atual = Arma(self.hunter,[self.sprites])
+
+    def apagar_ataque(self):
+        if self.ataque_atual:
+            self.ataque_atual.kill()
+        self.ataque_atual = None
     
     def desenha(self):
         self.sprites.custom_draw(self.hunter)

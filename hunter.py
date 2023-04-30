@@ -3,7 +3,7 @@ from constantes import *
 from settings import *
 
 class Hunter(pg.sprite.Sprite):
-    def __init__(self, posicao, grupos, objetos):
+    def __init__(self, posicao, grupos, objetos,criar_ataque,apagar_ataque):
         super().__init__(grupos)
         self.image = pg.image.load('docs/assets/img/hunter/idle.png').convert_alpha()
         self.rect = self.image.get_rect(center = posicao)
@@ -24,6 +24,15 @@ class Hunter(pg.sprite.Sprite):
 
         self.objetos = objetos
 
+        # arma
+        self.criar_ataque = criar_ataque
+        self.apagar_ataque = apagar_ataque
+        self.arma_index = 0
+        self.arma = list(dados_arma.keys())[self.arma_index]
+        self.pode_trocar_arma = True
+        self.tempo_troca = None
+        self.trocar_duracao_cooldown = 200
+        
     def sptites(self):
         pasta = 'docs/assets/img/hunter/'
         
@@ -111,11 +120,22 @@ class Hunter(pg.sprite.Sprite):
         if tecla[pg.K_SPACE] and not self.ataque:
             self.ataque = True
             self.ataque_timer = pg.time.get_ticks()
+            self.criar_ataque()
 
         # poder
         if tecla[pg.K_LSHIFT]and not self.ataque:
             self.ataque = True
             self.ataque_timer = pg.time.get_ticks()
+
+        if tecla[pg.K_q] and self.pode_trocar_arma:
+            self.pode_trocar_arma = False
+            self.tempo_troca = pg.time.get_ticks()
+            if self.arma_index == 0:
+                self.arma_index = 1
+                self.arma = list(dados_arma.keys())[self.arma_index]
+            elif self.arma_index == 1:
+                self.arma_index = 0
+                self.arma = list(dados_arma.keys())[self.arma_index]
 
     def update_estado(self):
         #idle
@@ -165,9 +185,15 @@ class Hunter(pg.sprite.Sprite):
 
     def cooldown(self):
         tempo_atual = pg.time.get_ticks()
+
         if self.ataque:
             if tempo_atual - self.ataque_timer >= self.ataque_cooldown:
-                self.ataque = False               
+                self.ataque = False
+                self.apagar_ataque()               
+
+        if not self.pode_trocar_arma:
+            if tempo_atual - self.tempo_troca >= self.trocar_duracao_cooldown:
+                self.pode_trocar_arma = True
 
     def update_animacao(self):
         animacao = self.animations[self.estado]
