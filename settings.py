@@ -10,15 +10,15 @@ def importa_csv(path):
             terreno.append(list(row))
         return terreno
     
-# def importa_imagem(path):
-#     lista_imagens = []
+def importa_imagem(path):
+    lista_imagens = []
 
-#     for _,__,arquivo in walk(path):
-#         for imagem in arquivo:
-#             full_path = path + '/' + imagem 
-#             grafico_img = pg.image.load(full_path).convert_alpha()
-#             lista_imagens.append(grafico_img)
+    for _,__,arquivo in walk(path):
+        for imagem in arquivo:
+            full_path = path + '/' + imagem 
+            grafico_img = pg.image.load(full_path).convert_alpha()
+            lista_imagens.append(grafico_img)
 
-#     return lista_imagens
+    return lista_imagens
 
             

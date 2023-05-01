@@ -7,6 +7,7 @@ from settings import *
 from random import choice
 from arma import Arma
 from dados import Dados
+from monstros import Monstros
 
 class Dungeon:
     def __init__(self):
@@ -27,19 +28,46 @@ class Dungeon:
         self.dados = Dados()
 
     def mapa(self):
-        layouts = {
-            "limite": importa_csv('docs/csv-map/parede.csv'), }
+        mapas_csv = {
+            "paredes": importa_csv('docs/csv-map/parede.csv'),
+            # "monstros": importa_csv('docs/csv-map/monstros.csv'), }
+        }
         
-        for style, layout in layouts.items():
+        graficos = {
+            "monstros": importa_imagem('docs/assets/img/monstros/')
+        }
+        
+        for tipo, layout in mapas_csv.items():
             for index_linha, linha in enumerate(layout):
                 for index_coluna, coluna in enumerate(linha):
                     if coluna != '-1':
                         x = index_coluna * TAMANHO_TILE
                         y = index_linha * TAMANHO_TILE
-                        if style == "limite":
+                        if tipo == "paredes":
                             Objetos((x,y), ([self.objetos]), 'invisivel')
-    
-        self.hunter = Hunter((1800,2800), [self.sprites], self.objetos,self.criar_ataque,self.apagar_ataque,self.criar_magia)
+                        # if tipo == "monstros":
+                        #     if coluna == "394":
+                        #         self.hunter = Hunter(
+                        #         (x,y), 
+                        #         [self.sprites],
+                        #         self.objetos,
+                        #         self.criar_ataque,
+                        #         self.apagar_ataque,
+                        #         self.criar_magia)
+                        #     else:
+                        #         Monstros(
+                        #         "monstro"
+                        #         (x,y),
+                        #         [self.sprites])
+
+        self.hunter = Hunter(
+        (1400,2000), 
+        [self.sprites],
+        self.objetos,
+        self.criar_ataque,
+        self.apagar_ataque,
+        self.criar_magia)
+
 
     def criar_ataque(self):
         self.ataque_atual = Arma(self.hunter,[self.sprites])

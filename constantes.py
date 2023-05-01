@@ -24,7 +24,7 @@ cor_vida = '#E03635'
 cor_energia = '#3736B8'
 cor_borda_ativacao = 'gold'
 
-#inimigo
+#arma
 dados_arma = {
     'espada1': {'cooldown': 300, 'dano': 10, 'imagem':'docs/assets/img/espadas/espada1/espada1.png'},
     'espada2': {'cooldown': 450, 'dano': 15, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'}
@@ -35,3 +35,11 @@ dados_magia = {
     'gelo' : {'forca': 7, 'custo':20, 'imagem':'docs/assets/img/magias/magia2/icone.png'},
     'conhecimento' : {'forca': 23, 'custo':40, 'imagem':'docs/assets/img/magias/magia1/icone.png'}
 }
+# inimigos 
+dados_inimigos = { 
+    'fogo': {'vida': 70, 'xp': 100, 'dano': 10, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 4, 'resistencia': 3, 'raio_ataque': 50, 'raio_visao': 360},
+    'skull': {'vida': 100, 'xp': 120, 'dano': 20, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 3, 'resistencia': 3, 'raio_ataque': 70, 'raio_visao': 360},
+    'demonio': {'vida': 150, 'xp': 150, 'dano': 30, 'ataque': 'burn', 'som_attaque':'', 'velocidade': 3, 'resistencia': 3, 'raio_ataque': 70, 'raio_visao': 360},
+    'beast': {'vida': 200, 'xp': 200, 'dano': 40, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 2, 'resistencia': 3, 'raio_ataque': 130, 'raio_visao': 400},
+    'cyclope': {'vida': 200, 'xp': 200, 'dano': 30, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 4, 'resistencia': 3, 'raio_ataque': 90, 'raio_visao': 500},
+} 

@@ -1,8 +1,9 @@
 import pygame as pg
 from constantes import *
 from settings import *
+from entidades import Entidades
 
-class Hunter(pg.sprite.Sprite):
+class Hunter(Entidades):
     def __init__(self, posicao, grupos, objetos,criar_ataque,apagar_ataque,criar_magia):
         super().__init__(grupos)
         self.image = pg.image.load('docs/assets/img/hunter/idle.png').convert_alpha()
@@ -12,11 +13,10 @@ class Hunter(pg.sprite.Sprite):
         # sprites
         self.sptites()
         self.estado = 'baixo'
-        self.index = 0
-        self.frame = 0.15
+
 
         # movimentação
-        self.direcao = pg.math.Vector2()
+
         self.ataque = False
         self.ataque_cooldown = 600
         self.ataque_timer = None
@@ -230,7 +230,7 @@ class Hunter(pg.sprite.Sprite):
     def update_animacao(self):
         animacao = self.animations[self.estado]
 
-        self.index += self.frame
+        self.index += self.vel_frame
         if self.index >= len(animacao):
             self.index = 0
 
