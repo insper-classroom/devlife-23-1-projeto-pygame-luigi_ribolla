@@ -24,9 +24,14 @@ cor_vida = '#E03635'
 cor_energia = '#3736B8'
 cor_borda_ativacao = 'gold'
 
-
 #inimigo
 dados_arma = {
     'espada1': {'cooldown': 300, 'dano': 10, 'imagem':'docs/assets/img/espadas/espada1/espada1.png'},
     'espada2': {'cooldown': 450, 'dano': 15, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'}
+}
+
+#magia
+dados_magia = {
+    'gelo' : {'forca': 7, 'custo':20, 'imagem':'docs/assets/img/magias/magia2/icone.png'},
+    'conhecimento' : {'forca': 23, 'custo':40, 'imagem':'docs/assets/img/magias/magia1/icone.png'}
 }

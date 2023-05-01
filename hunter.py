@@ -3,7 +3,7 @@ from constantes import *
 from settings import *
 
 class Hunter(pg.sprite.Sprite):
-    def __init__(self, posicao, grupos, objetos,criar_ataque,apagar_ataque):
+    def __init__(self, posicao, grupos, objetos,criar_ataque,apagar_ataque,criar_magia):
         super().__init__(grupos)
         self.image = pg.image.load('docs/assets/img/hunter/idle.png').convert_alpha()
         self.rect = self.image.get_rect(center = posicao)
@@ -32,8 +32,15 @@ class Hunter(pg.sprite.Sprite):
         self.tempo_troca = None
         self.trocar_duracao_cooldown = 200
 
+        #magia
+        self.criar_magia = criar_magia
+        self.magia_index = 0
+        self.magia = list(dados_magia.keys())[self.magia_index]
+        self.pode_trocar_magia = True
+        self.tempo_troca_magia = None
+
         #stats
-        self.stats = {'vida': 100,'energia': 100, 'ataque': 10, 'poder': 5, 'velocidade': 5}
+        self.stats = {'vida': 100,'energia': 100, 'ataque': 10, 'magia': 5, 'velocidade': 5}
         self.vida = self.stats['vida'] 
         self.energia = self.stats['energia']
         self.vel = self.stats['velocidade']
@@ -129,12 +136,16 @@ class Hunter(pg.sprite.Sprite):
                 self.ataque_timer = pg.time.get_ticks()
                 self.criar_ataque()
 
-            # poder
+            # magia
             if tecla[pg.K_LSHIFT]:
                 self.ataque = True
                 self.ataque_timer = pg.time.get_ticks()
+                estilo = list(dados_magia.keys())[self.magia_index]
+                forca = list(dados_magia.values())[self.magia_index]['forca'] + self.stats['magia']
+                custo = list(dados_magia.values())[self.magia_index]['custo']
+                self.criar_magia(estilo,forca,custo)
 
-            if tecla[pg.K_q] and self.pode_trocar_arma:
+            if tecla[pg.K_k] and self.pode_trocar_arma:
                 self.pode_trocar_arma = False
                 self.tempo_troca = pg.time.get_ticks()
                 if self.arma_index == 0:
@@ -143,6 +154,16 @@ class Hunter(pg.sprite.Sprite):
                 elif self.arma_index == 1:
                     self.arma_index = 0
                     self.arma = list(dados_arma.keys())[self.arma_index]
+
+            if tecla[pg.K_m] and self.pode_trocar_magia:
+                self.pode_trocar_magia = False
+                self.tempo_troca_magia = pg.time.get_ticks()
+                if self.magia_index == 0:
+                    self.magia_index = 1
+                    self.magia = list(dados_magia.keys())[self.magia_index]
+                elif self.magia_index == 1:
+                    self.magia_index = 0
+                    self.magia = list(dados_magia.keys())[self.magia_index]
 
     def update_estado(self):
         #idle
@@ -202,6 +223,10 @@ class Hunter(pg.sprite.Sprite):
             if tempo_atual - self.tempo_troca >= self.trocar_duracao_cooldown:
                 self.pode_trocar_arma = True
 
+        if not self.pode_trocar_magia:
+            if tempo_atual - self.tempo_troca_magia >= self.trocar_duracao_cooldown:
+                self.pode_trocar_magia = True
+
     def update_animacao(self):
         animacao = self.animations[self.estado]
 
@@ -219,4 +244,3 @@ class Hunter(pg.sprite.Sprite):
         self.update_estado()
         self.update_animacao()
         self.move(self.vel)
-

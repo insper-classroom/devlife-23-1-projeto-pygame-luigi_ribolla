@@ -39,7 +39,7 @@ class Dungeon:
                         if style == "limite":
                             Objetos((x,y), ([self.objetos]), 'invisivel')
     
-        self.hunter = Hunter((1800,2800), [self.sprites], self.objetos,self.criar_ataque,self.apagar_ataque)
+        self.hunter = Hunter((1800,2800), [self.sprites], self.objetos,self.criar_ataque,self.apagar_ataque,self.criar_magia)
 
     def criar_ataque(self):
         self.ataque_atual = Arma(self.hunter,[self.sprites])
@@ -48,6 +48,9 @@ class Dungeon:
         if self.ataque_atual:
             self.ataque_atual.kill()
         self.ataque_atual = None
+
+    def criar_magia(self,estilo,forca,custo):
+        print(estilo)
     
     def desenha(self):
         self.sprites.custom_draw(self.hunter)

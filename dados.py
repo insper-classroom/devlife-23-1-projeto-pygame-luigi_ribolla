@@ -20,6 +20,14 @@ class Dados:
             arma = pg.transform.scale(arma,(30,50))
             self.imagem_arma.append(arma)
 
+        # converter dicionario de magias
+        self.imagem_magia = []
+        for magia in dados_magia.values():
+            magia_atual = magia['imagem']
+            magia = pg.image.load(magia_atual).convert_alpha()
+            magia = pg.transform.scale(magia,(30,50))
+            self.imagem_magia.append(magia)
+
     def mostrar_barra(self,atual,maximo,rect_fundo,cor):
         #desenhar fundo
         pg.draw.rect(self.display_surface,cor_fundo,rect_fundo)
@@ -60,6 +68,13 @@ class Dados:
 
         self.display_surface.blit(arma_sup,rect_arma)
 
+    def sobrepor_magia(self,magia_index,troca):
+        rect_fundo = self.selecionar(100,510,troca) #magia
+        magia_sup = self.imagem_magia[magia_index]
+        rect_magia = magia_sup.get_rect(center = rect_fundo.center)
+
+        self.display_surface.blit(magia_sup,rect_magia)
+
     def display(self, hunter):
         self.mostrar_barra(hunter.vida,hunter.stats['vida'],self.rect_barra_vida,cor_vida)
         self.mostrar_barra(hunter.energia,hunter.stats['energia'],self.rect_barra_energia,cor_energia)
@@ -67,4 +82,4 @@ class Dados:
         # self.mostrar_xp(hunter.xp)
 
         self.sobrepor_arma(hunter.arma_index,not hunter.pode_trocar_arma)
-        # self.selecionar(100,510,troca) magica
+        self.sobrepor_magia(hunter.magia_index, not hunter.pode_trocar_magia)
