@@ -6,6 +6,7 @@ from hunter import Hunter
 from settings import *
 from random import choice
 from arma import Arma
+from dados import Dados
 
 class Dungeon:
     def __init__(self):
@@ -21,6 +22,9 @@ class Dungeon:
         self.ataque_atual = None
 
         self.mapa()
+
+        #interface
+        self.dados = Dados()
 
     def mapa(self):
         layouts = {
@@ -49,6 +53,7 @@ class Dungeon:
         self.sprites.custom_draw(self.hunter)
         self.sprites.update()
         self.hunter.desenha()
+        self.dados.display(self.hunter)
         
 
 class Camera(pg.sprite.Group):

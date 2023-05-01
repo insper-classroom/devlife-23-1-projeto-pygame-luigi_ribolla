@@ -5,6 +5,25 @@ ALTURA = 610
 FPS = 60
 TAMANHO_TILE = 48
 
+# Dados
+altura_barra = 20
+largura_vida = 200
+largura_energia = 140
+tamanho_item = 80
+dados_fonte = 'docs/site/static/style/Cabin_Sketch.ttf'
+tamanho_fonte = 18
+
+# Cores Gerais
+cor_agua = '#71ddee'
+cor_fundo = '#222222'
+cor_borda = (30,30,30)
+cor_texto = (255,255,255)
+
+# Cores Dados
+cor_vida = '#E03635'
+cor_energia = '#3736B8'
+cor_borda_ativacao = 'gold'
+
 
 #inimigo
 dados_arma = {

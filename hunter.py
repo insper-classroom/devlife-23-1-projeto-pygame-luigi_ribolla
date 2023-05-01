@@ -17,7 +17,6 @@ class Hunter(pg.sprite.Sprite):
 
         # movimentação
         self.direcao = pg.math.Vector2()
-        self.vel = 5
         self.ataque = False
         self.ataque_cooldown = 600
         self.ataque_timer = None
@@ -32,6 +31,13 @@ class Hunter(pg.sprite.Sprite):
         self.pode_trocar_arma = True
         self.tempo_troca = None
         self.trocar_duracao_cooldown = 200
+
+        #stats
+        self.stats = {'vida': 100,'energia': 100, 'ataque': 10, 'poder': 5, 'velocidade': 5}
+        self.vida = self.stats['vida'] 
+        self.energia = self.stats['energia']
+        self.vel = self.stats['velocidade']
+        self.xp = 10
         
     def sptites(self):
         pasta = 'docs/assets/img/hunter/'
