@@ -177,13 +177,13 @@ class Hunter(Entidades):
             self.direcao.y = 0
             if 'attack' not in self.estado:
                 if 'idle' in self.estado:
-                    self.estado.replace('idle_', 'attack_')
+                    self.estado = self.estado.replace('idle_', 'attack_')
                 else:
                     self.estado = 'attack_' + self.estado
 
         else: 
             if 'attack' in self.estado:
-                self.estado.replace('attack_', '')
+                self.estado = self.estado.replace('attack_', '')
 
     def move(self,vel):
         if self.direcao.magnitude() != 0: # se o vetor não for nulo
