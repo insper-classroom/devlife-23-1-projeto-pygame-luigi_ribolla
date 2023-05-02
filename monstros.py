@@ -45,13 +45,13 @@ class Monstros(Entidades):
                 sprite = pg.image.load(self.imagens['idle']).subsurface([0, 0],[16, 16])
                 self.animacoes['idle'].append(sprite)
                 
-                sprite = pg.image.load(self.imagens['idle']).subsurface([16, 0],[16, 16])
+                sprite = pg.image.load(self.imagens['idle']).subsurface([0, 16],[16, 16])
                 self.animacoes['idle'].append(sprite)
                 
-                sprite = pg.image.load(self.imagens['idle']).subsurface([32, 0],[16, 16])
+                sprite = pg.image.load(self.imagens['idle']).subsurface([0, 32],[16, 16])
                 self.animacoes['idle'].append(sprite)
                 
-                sprite = pg.image.load(self.imagens['idle']).subsurface([48, 0],[16, 16])  
+                sprite = pg.image.load(self.imagens['idle']).subsurface([0, 48],[16, 16])  
                 self.animacoes['idle'].append(sprite)
     
     def hunter_pos_dist(self, hunter):
@@ -81,8 +81,20 @@ class Monstros(Entidades):
         else:
             self.direcao = pg.math.Vector2()
 
+    def animacao(self):
+        animacao = self.animacoes['idle']
+
+        self.index += self.vel_frame
+        if self.index >= len(animacao):
+            self.index = 0
+
+        image = animacao[int(self.index)]
+        self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
+        self.rect = self.image.get_rect(center = self.hitbox.center)
+
     def update(self):
         self.move(self.vel)
+        self.animacao()
 
     def monstro_update(self, hunter):
         self.AI(hunter)

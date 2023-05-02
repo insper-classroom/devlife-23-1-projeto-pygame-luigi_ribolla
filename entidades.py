@@ -5,7 +5,7 @@ class Entidades(pg.sprite.Sprite):
         super().__init__(groups)
 
         self.index = 0
-        self.vel_frame = 0.17
+        self.vel_frame = 0.12
         self.direcao = pg.math.Vector2()
 
     def move(self,vel):
