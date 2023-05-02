@@ -36,9 +36,9 @@ dados_magia = {
     'conhecimento' : {'forca': 23, 'custo':40, 'imagem':'docs/assets/img/magias/magia1/icone.png'}
 }
 # inimigos 
-dados_inimigos = { 
-    'fogo': {'vida': 70, 'xp': 100, 'dano': 10, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 4, 'resistencia': 3, 'raio_ataque': 50, 'raio_visao': 360},
-    'skull': {'vida': 100, 'xp': 120, 'dano': 20, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 3, 'resistencia': 3, 'raio_ataque': 70, 'raio_visao': 360},
-    'beast': {'vida': 200, 'xp': 200, 'dano': 40, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 2, 'resistencia': 3, 'raio_ataque': 130, 'raio_visao': 400},
-    'cyclope': {'vida': 200, 'xp': 200, 'dano': 30, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 4, 'resistencia': 3, 'raio_ataque': 90, 'raio_visao': 500},
+monstros = { 
+    'fogo': {'vida': 70, 'xp': 100, 'dano': 10, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 3, 'resistencia': 3, 'raio_ataque': 50, 'raio_visao': 300},
+    'skull': {'vida': 100, 'xp': 120, 'dano': 20, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 2, 'resistencia': 3, 'raio_ataque': 60, 'raio_visao': 350},
+    'beast': {'vida': 200, 'xp': 200, 'dano': 40, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 1, 'resistencia': 3, 'raio_ataque': 120, 'raio_visao': 400},
+    'cyclope': {'vida': 200, 'xp': 200, 'dano': 30, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 3, 'raio_ataque': 70, 'raio_visao': 450},
 } 

@@ -238,7 +238,7 @@ class Hunter(Entidades):
         self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)
 
-    def desenha(self):
+    def update(self):
         self.input()
         self.cooldown() 
         self.update_estado()

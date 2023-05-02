@@ -60,26 +60,25 @@ class Dungeon:
                                 Monstros(
                                 'cyclope',
                                 (x,y),
-                                [self.sprites, self.objetos])
+                                [self.sprites], self.objetos)
                         if tipo == "fogo":
                             if coluna == "0":
                                 Monstros(
                                 'fogo',
                                 (x,y),
-                                [self.sprites, self.objetos])
+                                [self.sprites], self.objetos)
                         if tipo == "skull":
                             if coluna == "0":
                                 Monstros(
                                 'skull',
                                 (x,y),
-                                [self.sprites, self.objetos])
+                                [self.sprites], self.objetos)
                         if tipo == "beast":
                             if coluna == "0":
                                 Monstros(
                                 'beast',
                                 (x,y),
-                                [self.sprites, self.objetos])
-
+                                [self.sprites], self.objetos)
 
     def criar_ataque(self):
         self.ataque_atual = Arma(self.hunter,[self.sprites])
@@ -95,7 +94,8 @@ class Dungeon:
     def desenha(self):
         self.sprites.custom_draw(self.hunter)
         self.sprites.update()
-        self.hunter.desenha()
+        # self.hunter.desenha()
+        self.sprites.monstro_update(self.hunter)
         self.dados.display(self.hunter)
         
 
@@ -125,4 +125,8 @@ class Camera(pg.sprite.Group):
             offset_pos = sprite.rect.topleft - self.offset
             self.window.blit(sprite.image, offset_pos)
 
-
+    def monstro_update(self,hunter):
+        monstros_sprites = [sprite for sprite in self.sprites() if hasattr(sprite,"tipo") and sprite.tipo == 'monstro']
+        for monstro in monstros_sprites:
+            monstro.monstro_update(hunter)
+        

@@ -4,9 +4,9 @@ from entidades import Entidades
 from settings import * 
 
 class Monstros(Entidades):
-    def __init__(self, tipo, posicao, grupos):
+    def __init__(self, tipo, posicao, grupos, objetos):
         super().__init__(grupos)
-        self.tipo = tipo
+        self.tipo = "monstro"
 
         # graficos 
         self.graficos(tipo)
@@ -17,7 +17,20 @@ class Monstros(Entidades):
         # movimentação
         self.rect = self.image.get_rect(topleft = posicao)
         self.hitbox = self.rect.inflate(0,-10)
+        self.objetos = objetos
 
+        #características
+        self.nome = tipo
+        info = monstros[self.nome]
+        self.vida = info['vida']
+        self.xp = info["xp"]
+        self.dano = info["dano"]
+        self.vel = info["velocidade"]
+        self.resistencia = info["resistencia"]
+        self.raio_ataque = info["raio_ataque"]
+        self.raio_visao = info["raio_visao"]
+        self.ataque = info["ataque"]
+    
     def graficos(self,tipo):
         
         pasta = f'docs/assets/img/monstros/{tipo}/'
@@ -40,17 +53,37 @@ class Monstros(Entidades):
                 
                 sprite = pg.image.load(self.imagens['idle']).subsurface([48, 0],[16, 16])  
                 self.animacoes['idle'].append(sprite)
+    
+    def hunter_pos_dist(self, hunter):
+        vetor_monstro = pg.math.Vector2(self.rect.center)
+        vetor_hunter = pg.math.Vector2(hunter.rect.center)
+        distancia = (vetor_hunter - vetor_monstro).magnitude()
+        
+        if distancia > 0:
+            direcao =  (vetor_hunter - vetor_monstro).normalize()
+        else:
+            direcao = pg.math.Vector2()
 
-    # def update_animacao(self):
-    #     animacao = self.animations[self.estado]
+        return (distancia,direcao)
 
-    #     self.index += self.vel_frame
-    #     if self.index >= len(animacao):
-    #         self.index = 0
+    def AI(self, hunter):
+        distancia = self.hunter_pos_dist(hunter)[0]
+        if distancia <= self.raio_ataque:
+            self.estado = 'ataque'
+        if distancia <= self.raio_visao:
+            self.estado = 'move'
+        
+    def acao(self,hunter):
+        if self.estado == 'ataque':
+            print('ataque')
+        elif self.estado == 'move':
+            self.direcao = self.hunter_pos_dist(hunter)[1]
+        else:
+            self.direcao = pg.math.Vector2()
 
-    #     image = animacao[int(self.index)]
-    #     self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
-    #     self.rect = self.image.get_rect(center = self.hitbox.center)
+    def update(self):
+        self.move(self.vel)
 
-    # def desenha(self):
-    #     self.update_animacao()
+    def monstro_update(self, hunter):
+        self.AI(hunter)
+        self.acao(hunter)
