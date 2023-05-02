@@ -4,7 +4,7 @@ from entidades import Entidades
 from settings import * 
 
 class Monstros(Entidades):
-    def __init__(self, tipo, posicao, grupos, objetos):
+    def __init__(self, tipo, posicao, grupos, objetos, dano_player):
         super().__init__(grupos)
         self.tipo = "monstro"
         self.nome = tipo
@@ -36,6 +36,7 @@ class Monstros(Entidades):
         self.pode_atacar = True 
         self.tempo_ataque = None
         self.ataque_cooldown = 500
+        self.dano_player = dano_player
 
         # invencibilidade
         self.vuneravel = True
@@ -170,7 +171,7 @@ class Monstros(Entidades):
     def acao(self,hunter):
         if self.estado == 'ataque':
             self.tempo_ataque = pg.time.get_ticks()
-            print('attack')
+            self.dano_player(self.dano, self.ataque)
         if self.estado == 'move':
             self.direcao = self.hunter_pos_dist(hunter)[1]
         else:

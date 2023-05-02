@@ -45,6 +45,12 @@ class Hunter(Entidades):
         self.energia = self.stats['energia']
         self.vel = self.stats['velocidade']
         self.xp = 10
+
+        # tempo de dano
+        self.vulneravel = True
+        self.tempo_ataque = None
+        self.duracao_invulnerabilidade = 500
+
         
     def sprites(self):
         pasta = 'docs/assets/img/hunter/'
@@ -227,6 +233,10 @@ class Hunter(Entidades):
             if tempo_atual - self.tempo_troca_magia >= self.trocar_duracao_cooldown:
                 self.pode_trocar_magia = True
 
+        if not self.vulneravel:
+            if tempo_atual - self.tempo_ataque >= self.duracao_invulnerabilidade:
+                self.vulneravel = True
+
     def update_animacao(self):
         animacao = self.animations[self.estado]
 
@@ -237,6 +247,8 @@ class Hunter(Entidades):
         image = animacao[int(self.index)]
         self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)
+
+
 
     def dano_total(self):
         dano_base = self.stats['dano']

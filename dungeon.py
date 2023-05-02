@@ -68,31 +68,31 @@ class Dungeon:
                                 Monstros(
                                 'cyclope',
                                 (x,y),
-                                [self.sprites,self.sprites_atacaveis], self.objetos)
+                                [self.sprites,self.sprites_atacaveis], self.objetos, self.dano_player)
                         if tipo == "fogo":
                             if coluna == "0":
                                 Monstros(
                                 'fogo',
                                 (x,y),
-                                [self.sprites,self.sprites_atacaveis], self.objetos)
+                                [self.sprites,self.sprites_atacaveis], self.objetos, self.dano_player)
                         if tipo == "skull":
                             if coluna == "0":
                                 Monstros(
                                 'skull',
                                 (x,y),
-                                [self.sprites,self.sprites_atacaveis], self.objetos)
+                                [self.sprites,self.sprites_atacaveis], self.objetos, self.dano_player)
                         if tipo == "beast":
                             if coluna == "0":
                                 Monstros(
                                 'beast',
                                 (x,y),
-                                [self.sprites,self.sprites_atacaveis], self.objetos)
+                                [self.sprites,self.sprites_atacaveis], self.objetos, self.dano_player)
                         if tipo == "boss":
                             if coluna == "0":
                                 Monstros(
                                 'boss',
                                 (x,y),
-                                [self.sprites,self.sprites_atacaveis], self.objetos)
+                                [self.sprites,self.sprites_atacaveis], self.objetos, self.dano_player)
 
     def criar_ataque(self):
         self.ataque_atual = Arma(self.hunter,[self.sprites,self.sprites_ataque])
@@ -114,7 +114,14 @@ class Dungeon:
                         if alvo.tipo == 'monstro':
                             alvo.recebe_dano(self.hunter,sprite_ataque.tipo)
                             
-    
+    def dano_player(self,dano,ataque):
+        if self.hunter.vulneravel:
+            self.hunter.vida -= dano
+            if dano <= 0:
+                return False
+            self.hunter.vulneravel = False
+            self.hunter.tempo_ataque = pg.time.get_ticks()
+
     def desenha(self):
         self.sprites.custom_draw(self.hunter)
         self.sprites.update()
