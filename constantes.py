@@ -10,14 +10,14 @@ altura_barra = 20
 largura_vida = 200
 largura_energia = 140
 tamanho_item = 80
-dados_fonte = 'docs/site/static/style/Cabin_Sketch.ttf'
+dados_fonte = 'docs/site/static/style/PressStart2P-Regular.ttf'
 tamanho_fonte = 18
 
 # Cores Gerais
 cor_agua = '#71ddee'
 cor_fundo = '#222222'
 cor_borda = (30,30,30)
-cor_texto = (255,255,255)
+cor_texto = (95,211,236)
 
 # Cores Dados
 cor_vida = '#E03635'

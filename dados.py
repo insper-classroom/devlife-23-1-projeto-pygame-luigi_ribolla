@@ -42,15 +42,15 @@ class Dados:
         pg.draw.rect(self.display_surface,cor,rect_atual)
         pg.draw.rect(self.display_surface,cor_borda,rect_fundo,3)
 
-    # def mostrar_xp(self,xp):
-    #     texto_sup = self.font.render(str(int(xp)),False,cor_texto)
-    #     x = self.display_surface.get_size()[0] - 20
-    #     y = self.display_surface.get_size()[1] - 20
-    #     texto_rect = texto_sup.get_rect(bottomright = (x,y))
+    def mostrar_xp(self,xp):
+        texto_sup = self.font.render(str(int(xp)),False,cor_texto)
+        x = self.display_surface.get_size()[0] - 20
+        y = self.display_surface.get_size()[1] - 20
+        texto_rect = texto_sup.get_rect(bottomright = (x,y))
 
-    #     pg.draw.rect(self.display_surface,cor_fundo,texto_rect.inflate(10,10))
-    #     self.display_surface.blit(texto_sup,texto_rect)
-    #     pg.draw.rect(self.display_surface,cor_borda,texto_rect.inflate(10,10),3)
+        pg.draw.rect(self.display_surface,cor_fundo,texto_rect.inflate(10,10))
+        self.display_surface.blit(texto_sup,texto_rect)
+        pg.draw.rect(self.display_surface,cor_borda,texto_rect.inflate(10,10),3)
 
     def selecionar(self, esquerda, cima, troca):
         rect_fundo = pg.Rect(esquerda,cima,tamanho_item,tamanho_item)
@@ -79,7 +79,7 @@ class Dados:
         self.mostrar_barra(hunter.vida,hunter.stats['vida'],self.rect_barra_vida,cor_vida)
         self.mostrar_barra(hunter.energia,hunter.stats['energia'],self.rect_barra_energia,cor_energia)
 
-        # self.mostrar_xp(hunter.xp)
+        self.mostrar_xp(hunter.xp)
 
         self.sobrepor_arma(hunter.arma_index,not hunter.pode_trocar_arma)
         self.sobrepor_magia(hunter.magia_index, not hunter.pode_trocar_magia)

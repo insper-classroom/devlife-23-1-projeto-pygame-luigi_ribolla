@@ -31,6 +31,12 @@ class Monstros(Entidades):
         self.raio_ataque = info["raio_ataque"]
         self.raio_visao = info["raio_visao"]
         self.ataque = info["ataque"]
+
+        # intersação com o player
+        self.pode_atacar = True 
+        self.tempo_ataque = None
+        self.ataque_cooldown = 500
+
     
     def graficos(self,tipo):
         
@@ -93,15 +99,21 @@ class Monstros(Entidades):
 
     def AI(self, hunter):
         distancia = self.hunter_pos_dist(hunter)[0]
-        if distancia <= self.raio_ataque:
+        if distancia <= self.raio_ataque and self.pode_atacar:
+            if self.estado != 'ataque':
+                self.index = 0
             self.estado = 'ataque'
-        if distancia <= self.raio_visao:
+            self.pode_atacar = False
+            self.tempo_ataque = pg.time.get_ticks()
+            print('ataque')
+        elif distancia <= self.raio_visao:
             self.estado = 'move'
+        else: 
+            self.estado = 'idle'
         
     def acao(self,hunter):
-        if self.estado == 'ataque':
-            print('ataque')
-        elif self.estado == 'move':
+        # if self.estado == 'ataque':
+        if self.estado == 'move':
             self.direcao = self.hunter_pos_dist(hunter)[1]
         else:
             self.direcao = pg.math.Vector2()
@@ -111,22 +123,32 @@ class Monstros(Entidades):
 
         self.index += self.vel_frame
         if self.index >= len(animacao):
+            if self.estado == 'ataque':
+                self.pode_atacar = False
+                print('False')
             self.index = 0
 
         image = animacao[int(self.index)]
         if self.nome == 'boss':
             self.image = pg.transform.scale(image, (320, 288))
         elif self.nome == 'fogo':
-            self.image = pg.transform.scale(image, (32,32))
+            self.image = pg.transform.scale(image, (35,35))
         elif self.nome == 'skull':
             self.image = pg.transform.scale(image, (40,40))
         else:
             self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)
 
+    def cooldown(self):
+        if not self.pode_atacar:
+            tempo_atual = pg.time.get_ticks()
+            if tempo_atual - self.tempo_ataque >= self.ataque_cooldown:
+                self.pode_atacar = True
+
     def update(self):
         self.move(self.vel)
         self.animacao()
+        self.cooldown()
 
     def monstro_update(self, hunter):
         self.AI(hunter)

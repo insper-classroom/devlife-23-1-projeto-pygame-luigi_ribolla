@@ -21,6 +21,8 @@ class Dungeon:
 
         #ataque
         self.ataque_atual = None
+        self.sprites_ataque = pg.sprite.Group()
+        self.sprites_atacaveis = pg.sprite.Group()
 
         self.mapa()
 
@@ -66,34 +68,34 @@ class Dungeon:
                                 Monstros(
                                 'cyclope',
                                 (x,y),
-                                [self.sprites], self.objetos)
+                                [self.sprites,self.sprites_atacaveis], self.objetos)
                         if tipo == "fogo":
                             if coluna == "0":
                                 Monstros(
                                 'fogo',
                                 (x,y),
-                                [self.sprites], self.objetos)
+                                [self.sprites,self.sprites_atacaveis], self.objetos)
                         if tipo == "skull":
                             if coluna == "0":
                                 Monstros(
                                 'skull',
                                 (x,y),
-                                [self.sprites], self.objetos)
+                                [self.sprites,self.sprites_atacaveis], self.objetos)
                         if tipo == "beast":
                             if coluna == "0":
                                 Monstros(
                                 'beast',
                                 (x,y),
-                                [self.sprites], self.objetos)
+                                [self.sprites,self.sprites_atacaveis], self.objetos)
                         if tipo == "boss":
                             if coluna == "0":
                                 Monstros(
                                 'boss',
                                 (x,y),
-                                [self.sprites], self.objetos)
+                                [self.sprites,self.sprites_atacaveis], self.objetos)
 
     def criar_ataque(self):
-        self.ataque_atual = Arma(self.hunter,[self.sprites])
+        self.ataque_atual = Arma(self.hunter,[self.sprites,self.sprites_ataque])
 
     def apagar_ataque(self):
         if self.ataque_atual:
@@ -110,6 +112,10 @@ class Dungeon:
         self.sprites.monstro_update(self.hunter)
         self.dados.display(self.hunter)
         
+    def logica_ataque_hunter(self):
+        if self.sprites_ataque:
+            for sprite_ataque in self.sprites_ataque:
+                pg.sprite.spritecollide(sprite, group, True)
 
 class Camera(pg.sprite.Group):
     def __init__(self):
