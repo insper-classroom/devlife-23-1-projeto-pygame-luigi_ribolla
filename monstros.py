@@ -116,6 +116,10 @@ class Monstros(Entidades):
         image = animacao[int(self.index)]
         if self.nome == 'boss':
             self.image = pg.transform.scale(image, (320, 288))
+        elif self.nome == 'fogo':
+            self.image = pg.transform.scale(image, (32,32))
+        elif self.nome == 'skull':
+            self.image = pg.transform.scale(image, (40,40))
         else:
             self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)

@@ -45,7 +45,13 @@ class Dungeon:
                         x = index_coluna * TAMANHO_TILE
                         y = index_linha * TAMANHO_TILE
                         if tipo == "parede":
-                            Objetos((x,y), ([self.objetos]), 'invisivel')
+                            if coluna != "100" and coluna != '87':
+                                Objetos((x,y), ([self.objetos]), 'invisivel')
+                            elif coluna == "100":
+                                Objetos((x,y), ([self.sprites,self.objetos]), 'estatua', pg.image.load('docs/assets/img/estatuas/grande.png'))
+                            elif coluna == '87':
+                                Objetos((x,y), ([self.sprites,self.objetos]), 'sapao', pg.image.load('docs/assets/img/estatuas/sapao.png'))
+
                         if tipo == "hunter":
                             if coluna == "397":
                                 self.hunter = Hunter(
