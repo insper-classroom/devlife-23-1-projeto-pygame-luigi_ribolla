@@ -1,5 +1,5 @@
 import pygame as pg
-
+from math import sin
 class Entidades(pg.sprite.Sprite): 
     def __init__(self,groups):
         super().__init__(groups)
@@ -19,6 +19,7 @@ class Entidades(pg.sprite.Sprite):
         self.rect.center = self.hitbox.center
 
     def collision(self, direcao):
+
         if direcao == "x":
             for objeto in self.objetos:
                 if objeto.hitbox.colliderect(self.hitbox):
@@ -33,3 +34,10 @@ class Entidades(pg.sprite.Sprite):
                         self.hitbox.bottom = objeto.hitbox.top
                     elif self.direcao.y < 0: # se estiver indo para cima
                         self.hitbox.top = objeto.hitbox.bottom
+    
+    def wave_value(self):
+        value = sin(pg.time.get_ticks())
+        if value >= 0:
+            return 255
+        else:
+            return 0

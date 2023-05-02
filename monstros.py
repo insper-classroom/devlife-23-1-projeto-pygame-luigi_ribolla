@@ -41,7 +41,6 @@ class Monstros(Entidades):
         self.vuneravel = True
         self.tempo_hit = None
         self.invencibilidade_cooldown = 300
-
     
     def graficos(self,tipo):
         
@@ -49,13 +48,15 @@ class Monstros(Entidades):
 
         self.imagens = {
             "idle": (pasta + 'idle.png'),
+            "ataque": (pasta + 'ataque.png'),
             }
         
-        self.animacoes = {"idle": []}
+        self.animacoes = {"idle": [], 'move': [],
+                          'ataque': []}
 
         if tipo != 'boss':
 
-            for sprite in self.animacoes.keys():
+            for sprite in range(4):
                     sprite = pg.image.load(self.imagens['idle']).subsurface([0, 0],[16, 16])
                     self.animacoes['idle'].append(sprite)
                     
@@ -68,9 +69,9 @@ class Monstros(Entidades):
                     sprite = pg.image.load(self.imagens['idle']).subsurface([0, 48],[16, 16])  
                     self.animacoes['idle'].append(sprite)
         
-        if tipo == 'boss':
+        elif tipo == 'boss':
 
-            for sprite in self.animacoes.keys():
+            for sprite in range(6):
                 sprite = pg.image.load(self.imagens['idle']).subsurface([0, 0],[160, 144])
                 self.animacoes['idle'].append(sprite)
                     
@@ -89,14 +90,67 @@ class Monstros(Entidades):
                 sprite = pg.image.load(self.imagens['idle']).subsurface([800, 0],[160, 144])
                 self.animacoes['idle'].append(sprite)
 
-    
+            for sprite in range(6):
+                sprite = pg.image.load(self.imagens['idle']).subsurface([0, 0],[160, 144])
+                self.animacoes['move'].append(sprite)
+                    
+                sprite = pg.image.load(self.imagens['idle']).subsurface([160, 0],[160, 144])
+                self.animacoes['move'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['idle']).subsurface([320, 0],[160, 144])
+                self.animacoes['move'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['idle']).subsurface([480, 0],[160, 144])  
+                self.animacoes['move'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['idle']).subsurface([640, 0],[160, 144])
+                self.animacoes['move'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['idle']).subsurface([800, 0],[160, 144])
+                self.animacoes['move'].append(sprite)
+
+            for sprite in range(11):
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([0, 0],[240, 192])
+                self.animacoes['ataque'].append(sprite)
+                    
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([240, 0],[240, 192])
+                self.animacoes['ataque'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([480, 0],[240, 192])
+                self.animacoes['ataque'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([720, 0],[240, 192])  
+                self.animacoes['ataque'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([960, 0],[240, 192])
+                self.animacoes['ataque'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([1200, 0],[240, 192])
+                self.animacoes['ataque'].append(sprite)
+
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([1440, 0],[240, 192])
+                self.animacoes['ataque'].append(sprite)
+                    
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([1680, 0],[240, 192])
+                self.animacoes['ataque'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([1920, 0],[240, 192])
+                self.animacoes['ataque'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([2160, 0],[240, 192])  
+                self.animacoes['ataque'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['ataque']).subsurface([2400, 0],[240, 192])
+                self.animacoes['ataque'].append(sprite)         
+  
     def hunter_pos_dist(self, hunter):
+        
         vetor_monstro = pg.math.Vector2(self.rect.center)
         vetor_hunter = pg.math.Vector2(hunter.rect.center)
         distancia = (vetor_hunter - vetor_monstro).magnitude()
         
         if distancia > 0:
-            direcao =  (vetor_hunter - vetor_monstro).normalize()
+            direcao = (vetor_hunter - vetor_monstro).normalize()
         else:
             direcao = pg.math.Vector2()
 
@@ -108,34 +162,38 @@ class Monstros(Entidades):
             if self.estado != 'ataque':
                 self.index = 0
             self.estado = 'ataque'
-            self.pode_atacar = False
-            self.tempo_ataque = pg.time.get_ticks()
-            print('ataque')
         elif distancia <= self.raio_visao:
             self.estado = 'move'
         else: 
             self.estado = 'idle'
         
     def acao(self,hunter):
-        # if self.estado == 'ataque':
+        if self.estado == 'ataque':
+            self.tempo_ataque = pg.time.get_ticks()
+            print('attack')
         if self.estado == 'move':
             self.direcao = self.hunter_pos_dist(hunter)[1]
         else:
             self.direcao = pg.math.Vector2()
 
     def animacao(self):
-        animacao = self.animacoes['idle']
+        if self.nome == 'boss':
+            animacao = self.animacoes[self.estado]
+        else:
+            animacao = self.animacoes['idle']
 
         self.index += self.vel_frame
         if self.index >= len(animacao):
-            if self.estado == 'ataque':
+            if self.estado == "ataque":
                 self.pode_atacar = False
-                print('False')
             self.index = 0
 
         image = animacao[int(self.index)]
         if self.nome == 'boss':
-            self.image = pg.transform.scale(image, (320, 288))
+            if self.estado == 'ataque':
+                self.image = pg.transform.scale(image, (480, 384))
+            else:
+                self.image = pg.transform.scale(image, (320, 288))
         elif self.nome == 'fogo':
             self.image = pg.transform.scale(image, (35,35))
         elif self.nome == 'skull':
@@ -143,6 +201,12 @@ class Monstros(Entidades):
         else:
             self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)
+
+        if not self.vuneravel:
+            alpha = self.wave_value()
+            self.image.set_alpha(alpha)
+        else:
+            self.image.set_alpha(255)
 
     def cooldowns(self):
         tempo_atual = pg.time.get_ticks()
@@ -172,8 +236,7 @@ class Monstros(Entidades):
     def reacao(self):
         if not self.vuneravel:
             self.direcao *= - self.resistencia
-
-    
+   
     def update(self):
         self.reacao()
         self.move(self.vel)
