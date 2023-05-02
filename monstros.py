@@ -7,6 +7,7 @@ class Monstros(Entidades):
     def __init__(self, tipo, posicao, grupos, objetos):
         super().__init__(grupos)
         self.tipo = "monstro"
+        self.nome = tipo
 
         # graficos 
         self.graficos(tipo)
@@ -40,19 +41,43 @@ class Monstros(Entidades):
             }
         
         self.animacoes = {"idle": []}
+
+        if tipo != 'boss':
+
+            for sprite in self.animacoes.keys():
+                    sprite = pg.image.load(self.imagens['idle']).subsurface([0, 0],[16, 16])
+                    self.animacoes['idle'].append(sprite)
+                    
+                    sprite = pg.image.load(self.imagens['idle']).subsurface([0, 16],[16, 16])
+                    self.animacoes['idle'].append(sprite)
+                    
+                    sprite = pg.image.load(self.imagens['idle']).subsurface([0, 32],[16, 16])
+                    self.animacoes['idle'].append(sprite)
+                    
+                    sprite = pg.image.load(self.imagens['idle']).subsurface([0, 48],[16, 16])  
+                    self.animacoes['idle'].append(sprite)
         
-        for sprite in self.animacoes.keys():
-                sprite = pg.image.load(self.imagens['idle']).subsurface([0, 0],[16, 16])
+        if tipo == 'boss':
+
+            for sprite in self.animacoes.keys():
+                sprite = pg.image.load(self.imagens['idle']).subsurface([0, 0],[160, 144])
+                self.animacoes['idle'].append(sprite)
+                    
+                sprite = pg.image.load(self.imagens['idle']).subsurface([160, 0],[160, 144])
                 self.animacoes['idle'].append(sprite)
                 
-                sprite = pg.image.load(self.imagens['idle']).subsurface([0, 16],[16, 16])
+                sprite = pg.image.load(self.imagens['idle']).subsurface([320, 0],[160, 144])
                 self.animacoes['idle'].append(sprite)
                 
-                sprite = pg.image.load(self.imagens['idle']).subsurface([0, 32],[16, 16])
+                sprite = pg.image.load(self.imagens['idle']).subsurface([480, 0],[160, 144])  
                 self.animacoes['idle'].append(sprite)
                 
-                sprite = pg.image.load(self.imagens['idle']).subsurface([0, 48],[16, 16])  
+                sprite = pg.image.load(self.imagens['idle']).subsurface([640, 0],[160, 144])
                 self.animacoes['idle'].append(sprite)
+                
+                sprite = pg.image.load(self.imagens['idle']).subsurface([800, 0],[160, 144])
+                self.animacoes['idle'].append(sprite)
+
     
     def hunter_pos_dist(self, hunter):
         vetor_monstro = pg.math.Vector2(self.rect.center)
@@ -89,7 +114,10 @@ class Monstros(Entidades):
             self.index = 0
 
         image = animacao[int(self.index)]
-        self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
+        if self.nome == 'boss':
+            self.image = pg.transform.scale(image, (320, 288))
+        else:
+            self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)
 
     def update(self):

@@ -79,6 +79,12 @@ class Dungeon:
                                 'beast',
                                 (x,y),
                                 [self.sprites], self.objetos)
+                        if tipo == "boss":
+                            if coluna == "0":
+                                Monstros(
+                                'boss',
+                                (x,y),
+                                [self.sprites], self.objetos)
 
     def criar_ataque(self):
         self.ataque_atual = Arma(self.hunter,[self.sprites])

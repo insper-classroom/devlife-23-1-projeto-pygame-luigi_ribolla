@@ -41,4 +41,5 @@ monstros = {
     'skull': {'vida': 100, 'xp': 120, 'dano': 20, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 2, 'resistencia': 3, 'raio_ataque': 60, 'raio_visao': 350},
     'beast': {'vida': 200, 'xp': 200, 'dano': 40, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 1, 'resistencia': 3, 'raio_ataque': 120, 'raio_visao': 400},
     'cyclope': {'vida': 200, 'xp': 200, 'dano': 30, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 3, 'raio_ataque': 70, 'raio_visao': 450},
+    'boss': {'vida': 300, 'xp': 300, 'dano': 50, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 1.5, 'resistencia': 3, 'raio_ataque': 120, 'raio_visao': 200},
 } 
