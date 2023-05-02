@@ -29,13 +29,14 @@ class Dungeon:
 
     def mapa(self):
         mapas_csv = {
-            "paredes": importa_csv('docs/csv-map/parede.csv'),
-            # "monstros": importa_csv('docs/csv-map/monstros.csv'), }
-        }
-        
-        graficos = {
-            "monstros": importa_imagem('docs/assets/img/monstros/')
-        }
+            "parede": importa_csv('docs/csv-map/parede.csv'),
+            "hunter": importa_csv('docs/csv-map/hunter.csv'),
+            "cyclope": importa_csv('docs/csv-map/cyclope.csv'),
+            "fogo": importa_csv('docs/csv-map/fogo.csv'),
+            "skull": importa_csv('docs/csv-map/skull.csv'),
+            "beast": importa_csv('docs/csv-map/beast.csv'),
+            "boss": importa_csv('docs/csv-map/boss.csv'),
+             }
         
         for tipo, layout in mapas_csv.items():
             for index_linha, linha in enumerate(layout):
@@ -43,30 +44,41 @@ class Dungeon:
                     if coluna != '-1':
                         x = index_coluna * TAMANHO_TILE
                         y = index_linha * TAMANHO_TILE
-                        if tipo == "paredes":
+                        if tipo == "parede":
                             Objetos((x,y), ([self.objetos]), 'invisivel')
-                        # if tipo == "monstros":
-                        #     if coluna == "394":
-                        #         self.hunter = Hunter(
-                        #         (x,y), 
-                        #         [self.sprites],
-                        #         self.objetos,
-                        #         self.criar_ataque,
-                        #         self.apagar_ataque,
-                        #         self.criar_magia)
-                        #     else:
-                        #         Monstros(
-                        #         "monstro"
-                        #         (x,y),
-                        #         [self.sprites])
-
-        self.hunter = Hunter(
-        (1400,2000), 
-        [self.sprites],
-        self.objetos,
-        self.criar_ataque,
-        self.apagar_ataque,
-        self.criar_magia)
+                        if tipo == "hunter":
+                            if coluna == "397":
+                                self.hunter = Hunter(
+                                (x,y), 
+                                [self.sprites],
+                                self.objetos,
+                                self.criar_ataque,
+                                self.apagar_ataque,
+                                self.criar_magia)
+                        if tipo == "cyclope":
+                            if coluna == "0":
+                                Monstros(
+                                'cyclope',
+                                (x,y),
+                                [self.sprites, self.objetos])
+                        if tipo == "fogo":
+                            if coluna == "0":
+                                Monstros(
+                                'fogo',
+                                (x,y),
+                                [self.sprites, self.objetos])
+                        if tipo == "skull":
+                            if coluna == "0":
+                                Monstros(
+                                'skull',
+                                (x,y),
+                                [self.sprites, self.objetos])
+                        if tipo == "beast":
+                            if coluna == "0":
+                                Monstros(
+                                'beast',
+                                (x,y),
+                                [self.sprites, self.objetos])
 
 
     def criar_ataque(self):

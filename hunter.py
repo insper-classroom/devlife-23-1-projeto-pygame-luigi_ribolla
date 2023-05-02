@@ -40,7 +40,7 @@ class Hunter(Entidades):
         self.tempo_troca_magia = None
 
         #stats
-        self.stats = {'vida': 100,'energia': 100, 'ataque': 10, 'magia': 5, 'velocidade': 5}
+        self.stats = {'vida': 100,'energia': 100, 'ataque': 10, 'magia': 5, 'velocidade': 4}
         self.vida = self.stats['vida'] 
         self.energia = self.stats['energia']
         self.vel = self.stats['velocidade']

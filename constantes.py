@@ -39,7 +39,6 @@ dados_magia = {
 dados_inimigos = { 
     'fogo': {'vida': 70, 'xp': 100, 'dano': 10, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 4, 'resistencia': 3, 'raio_ataque': 50, 'raio_visao': 360},
     'skull': {'vida': 100, 'xp': 120, 'dano': 20, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 3, 'resistencia': 3, 'raio_ataque': 70, 'raio_visao': 360},
-    'demonio': {'vida': 150, 'xp': 150, 'dano': 30, 'ataque': 'burn', 'som_attaque':'', 'velocidade': 3, 'resistencia': 3, 'raio_ataque': 70, 'raio_visao': 360},
     'beast': {'vida': 200, 'xp': 200, 'dano': 40, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 2, 'resistencia': 3, 'raio_ataque': 130, 'raio_visao': 400},
     'cyclope': {'vida': 200, 'xp': 200, 'dano': 30, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 4, 'resistencia': 3, 'raio_ataque': 90, 'raio_visao': 500},
 } 
