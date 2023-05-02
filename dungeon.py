@@ -105,17 +105,23 @@ class Dungeon:
     def criar_magia(self,estilo,forca,custo):
         print(estilo)
     
-    def desenha(self):
-        self.sprites.custom_draw(self.hunter)
-        self.sprites.update()
-        # self.hunter.desenha()
-        self.sprites.monstro_update(self.hunter)
-        self.dados.display(self.hunter)
-        
     def logica_ataque_hunter(self):
         if self.sprites_ataque:
             for sprite_ataque in self.sprites_ataque:
-                pg.sprite.spritecollide(sprite, group, True)
+                colisao_sprites = pg.sprite.spritecollide(sprite_ataque, self.sprites_atacaveis, False)
+                if colisao_sprites:
+                    for alvo in colisao_sprites:
+                        if alvo.tipo == 'monstro':
+                            alvo.recebe_dano(self.hunter,sprite_ataque.tipo)
+                            
+    
+    def desenha(self):
+        self.sprites.custom_draw(self.hunter)
+        self.sprites.update()
+        self.sprites.monstro_update(self.hunter)
+        self.logica_ataque_hunter()
+        self.dados.display(self.hunter)
+        
 
 class Camera(pg.sprite.Group):
     def __init__(self):

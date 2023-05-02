@@ -27,7 +27,7 @@ cor_borda_ativacao = 'gold'
 #arma
 dados_arma = {
     'espada1': {'cooldown': 300, 'dano': 10, 'imagem':'docs/assets/img/espadas/espada1/espada1.png'},
-    'espada2': {'cooldown': 450, 'dano': 15, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'}
+    'espada2': {'cooldown': 450, 'dano': 70, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'}
 }
 
 #magia
@@ -37,9 +37,9 @@ dados_magia = {
 }
 # inimigos 
 monstros = { 
-    'fogo': {'vida': 70, 'xp': 100, 'dano': 10, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 3, 'resistencia': 3, 'raio_ataque': 50, 'raio_visao': 300},
-    'skull': {'vida': 100, 'xp': 120, 'dano': 20, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 2, 'resistencia': 3, 'raio_ataque': 60, 'raio_visao': 350},
-    'beast': {'vida': 200, 'xp': 200, 'dano': 40, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 1, 'resistencia': 3, 'raio_ataque': 120, 'raio_visao': 400},
-    'cyclope': {'vida': 200, 'xp': 200, 'dano': 30, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 3, 'raio_ataque': 70, 'raio_visao': 450},
-    'boss': {'vida': 300, 'xp': 300, 'dano': 50, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 1.5, 'resistencia': 3, 'raio_ataque': 120, 'raio_visao': 200},
+    'fogo': {'vida': 70, 'xp': 100, 'dano': 10, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 3, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 300},
+    'skull': {'vida': 100, 'xp': 120, 'dano': 20, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 2, 'resistencia': 5, 'raio_ataque': 60, 'raio_visao': 350},
+    'beast': {'vida': 200, 'xp': 200, 'dano': 40, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 1, 'resistencia': 5, 'raio_ataque': 120, 'raio_visao': 400},
+    'cyclope': {'vida': 200, 'xp': 200, 'dano': 30, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 5, 'raio_ataque': 70, 'raio_visao': 450},
+    'boss': {'vida': 300, 'xp': 300, 'dano': 50, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 1.5, 'resistencia': 5, 'raio_ataque': 120, 'raio_visao': 200},
 } 

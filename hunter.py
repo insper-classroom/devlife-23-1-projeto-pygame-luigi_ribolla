@@ -11,14 +11,14 @@ class Hunter(Entidades):
         self.hitbox = self.rect
 
         # sprites
-        self.sptites()
+        self.sprites()
         self.estado = 'baixo'
 
 
         # movimentação
 
         self.ataque = False
-        self.ataque_cooldown = 600
+        self.ataque_cooldown = 150
         self.ataque_timer = None
 
         self.objetos = objetos
@@ -40,13 +40,13 @@ class Hunter(Entidades):
         self.tempo_troca_magia = None
 
         #stats
-        self.stats = {'vida': 100,'energia': 100, 'ataque': 10, 'magia': 5, 'velocidade': 4}
+        self.stats = {'vida': 100,'energia': 100, 'dano': 10, 'magia': 5, 'velocidade': 4}
         self.vida = self.stats['vida'] 
         self.energia = self.stats['energia']
         self.vel = self.stats['velocidade']
         self.xp = 10
         
-    def sptites(self):
+    def sprites(self):
         pasta = 'docs/assets/img/hunter/'
         
         self.imagens = {
@@ -215,7 +215,7 @@ class Hunter(Entidades):
         tempo_atual = pg.time.get_ticks()
 
         if self.ataque:
-            if tempo_atual - self.ataque_timer >= self.ataque_cooldown:
+            if tempo_atual - self.ataque_timer >= self.ataque_cooldown + dados_arma[self.arma]['cooldown']:
                 self.ataque = False
                 self.apagar_ataque()               
 
@@ -237,6 +237,12 @@ class Hunter(Entidades):
         image = animacao[int(self.index)]
         self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)
+
+    def dano_total(self):
+        dano_base = self.stats['dano']
+        dano_arma = dados_arma[self.arma]['dano']
+
+        return dano_base + dano_arma
 
     def update(self):
         self.input()

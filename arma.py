@@ -3,6 +3,7 @@ import pygame as pg
 class Arma(pg.sprite.Sprite):
     def __init__(self,hunter,grupos):
         super().__init__(grupos)
+        self.tipo = "arma"
         if 'idle' in hunter.estado or 'attack' in hunter.estado:
             direcao = hunter.estado.split('_')[1]
         else:

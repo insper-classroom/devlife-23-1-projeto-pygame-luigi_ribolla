@@ -37,6 +37,11 @@ class Monstros(Entidades):
         self.tempo_ataque = None
         self.ataque_cooldown = 500
 
+        # invencibilidade
+        self.vuneravel = True
+        self.tempo_hit = None
+        self.invencibilidade_cooldown = 300
+
     
     def graficos(self,tipo):
         
@@ -139,16 +144,42 @@ class Monstros(Entidades):
             self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)
 
-    def cooldown(self):
+    def cooldowns(self):
+        tempo_atual = pg.time.get_ticks()
         if not self.pode_atacar:
-            tempo_atual = pg.time.get_ticks()
             if tempo_atual - self.tempo_ataque >= self.ataque_cooldown:
                 self.pode_atacar = True
+        
+        if not self.vuneravel:
+            if tempo_atual - self.tempo_hit >= self.invencibilidade_cooldown:
+                self.vuneravel = True
 
+    def recebe_dano(self,hunter,tipo_ataque):
+        if self.vuneravel:
+            self.direcao = self.hunter_pos_dist(hunter)[1]
+            if tipo_ataque == 'arma':
+                self.vida -= hunter.dano_total()
+            else:
+                pass
+                #dano magia
+            self.tempo_hit = pg.time.get_ticks()
+            self.vuneravel = False
+
+    def morte(self):
+        if self.vida <= 0:
+            self.kill()
+
+    def reacao(self):
+        if not self.vuneravel:
+            self.direcao *= - self.resistencia
+
+    
     def update(self):
+        self.reacao()
         self.move(self.vel)
         self.animacao()
-        self.cooldown()
+        self.cooldowns()
+        self.morte()
 
     def monstro_update(self, hunter):
         self.AI(hunter)
