@@ -133,7 +133,7 @@ class Dungeon:
     def add_xp(self,soma):
         self.hunter.xp += soma
         if self.hunter.vida < 360:
-            self.hunter.vida += 2
+            self.hunter.vida += 5
 
     def desenha(self):
         self.sprites.custom_draw(self.hunter)
