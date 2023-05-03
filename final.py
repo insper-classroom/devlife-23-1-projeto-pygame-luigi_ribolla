@@ -9,8 +9,10 @@ class Fim:
         pg.init()
         pg.display.set_caption('Desolation')
         self.window = pg.display.set_mode((LARGURA, ALTURA))
-
+        background = pg.image.load("docs/assets/img/tela_final.jpg")
+        self.background = pg.transform.scale(background, (LARGURA, ALTURA))
     def desenha(self):
+        self.window.blit(self.background, (0, 0))
         while True:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -21,5 +23,4 @@ class Fim:
                         pg.quit()
                         sys.exit()
 
-            self.window.fill((0,0,0))
             pg.display.update()

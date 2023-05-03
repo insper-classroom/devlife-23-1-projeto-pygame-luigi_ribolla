@@ -53,7 +53,6 @@ class Hunter(Entidades):
         self.vulneravel = True
         self.tempo_ataque = None
         self.duracao_invulnerabilidade = 500
-
         
     def sprites(self):
         pasta = 'docs/assets/img/hunter/'
@@ -227,6 +226,7 @@ class Hunter(Entidades):
                         self.hitbox.bottom = objeto.hitbox.top
                     elif self.direcao.y < 0: # se estiver indo para cima
                         self.hitbox.top = objeto.hitbox.bottom
+    
     def health(self):
         if self.vida <= 0:
             return False
@@ -261,7 +261,6 @@ class Hunter(Entidades):
         image = animacao[int(self.index)]
         self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)
-
 
     def dano_total(self):
         dano_base = self.stats['dano']
