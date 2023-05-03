@@ -117,10 +117,11 @@ class Dungeon:
     def dano_player(self,dano,ataque):
         if self.hunter.vulneravel:
             self.hunter.vida -= dano
-            if dano <= 0:
+            if self.hunter.vida <= 0:
                 return False
             self.hunter.vulneravel = False
             self.hunter.tempo_ataque = pg.time.get_ticks()
+        return True
 
     def add_xp(self,soma):
         self.hunter.xp += soma

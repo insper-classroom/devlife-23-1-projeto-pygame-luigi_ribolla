@@ -41,10 +41,13 @@ class Hunter(Entidades):
 
         #stats
         self.stats = {'vida': 100,'energia': 100, 'dano': 10, 'magia': 5, 'velocidade': 4}
+        self.max_stats = {'vida': 300,'energia': 140, 'dano': 20, 'magia': 10, 'velocidade': 10}
+        self.custo_upgrade = {'vida': 100,'energia': 100, 'dano': 100, 'magia': 100, 'velocidade': 100}
         self.vida = self.stats['vida'] 
         self.energia = self.stats['energia']
         self.vel = self.stats['velocidade']
-        self.xp = 0
+        self.xp = 500
+        self.vivo = True
 
         # tempo de dano
         self.vulneravel = True
@@ -224,6 +227,9 @@ class Hunter(Entidades):
                         self.hitbox.bottom = objeto.hitbox.top
                     elif self.direcao.y < 0: # se estiver indo para cima
                         self.hitbox.top = objeto.hitbox.bottom
+    def health(self):
+        if self.vida <= 0:
+            return False
 
     def cooldown(self):
         tempo_atual = pg.time.get_ticks()
@@ -255,7 +261,6 @@ class Hunter(Entidades):
         image = animacao[int(self.index)]
         self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)
-
 
 
     def dano_total(self):
