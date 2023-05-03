@@ -32,3 +32,5 @@ O processo de desenvolvimento deste jogo começou com o objetivo de mirarmos por
 ## Créditos
 
 imagem de funde de morte: https://br.pinterest.com/pin/459578336955918929/
+
+musica de fundo: https://www.youtube.com/watch?v=bLbf3ulQsp8

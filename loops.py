@@ -13,6 +13,9 @@ class Loop:
         self.fim = Fim()
         background = pg.image.load("docs/assets/img/tela_inicio2.jpg")
         self.background = pg.transform.scale(background, (LARGURA, ALTURA))
+        pg.mixer.music.load("docs/assets/snd/background_music.ogg")
+        pg.mixer.music.set_volume(1)
+        pg.mixer.music.play(-1)
 
     def desenha(self):
         self.window.blit(self.background, (0, 0))

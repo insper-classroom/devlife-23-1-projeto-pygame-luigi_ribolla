@@ -9,6 +9,8 @@ class Hunter(Entidades):
         self.image = pg.image.load('docs/assets/img/hunter/idle.png').convert_alpha()
         self.rect = self.image.get_rect(center = posicao)
         self.hitbox = self.rect
+        self.som_ataque = pg.mixer.Sound('docs/assets/snd/sword_hit.ogg')
+        self.som_ataque.set_volume(0.05)
 
         # sprites
         self.sprites()
@@ -46,7 +48,7 @@ class Hunter(Entidades):
         self.vida = self.stats['vida'] 
         self.energia = self.stats['energia']
         self.vel = self.stats['velocidade']
-        self.xp = 500
+        self.xp = 0
         self.vivo = True
 
         # tempo de dano
@@ -145,6 +147,8 @@ class Hunter(Entidades):
                 self.criar_ataque()
                 if self.arma_index == 2:
                     self.energia -= 10
+                self.som_ataque.play()
+                
 
             # magia
             if tecla[pg.K_LSHIFT]:

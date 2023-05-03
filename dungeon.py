@@ -35,6 +35,9 @@ class Dungeon:
         # self.animation_player = AnimationPlayer()
         # self.magia = Magia(self.animation_player)
 
+        self.monstro = pg.mixer.Sound('docs/assets/snd/enemy_death.ogg')
+        self.monstro.set_volume(0.1)
+
     def mapa(self):
         mapas_csv = {
             "parede": importa_csv('docs/csv-map/parede.csv'),
@@ -134,6 +137,8 @@ class Dungeon:
         self.hunter.xp += soma
         if self.hunter.vida < 360:
             self.hunter.vida += 5
+        self.monstro.play()
+            
 
     def desenha(self):
         self.sprites.custom_draw(self.hunter)
