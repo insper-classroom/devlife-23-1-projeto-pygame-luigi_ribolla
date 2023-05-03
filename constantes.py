@@ -26,8 +26,8 @@ cor_borda_ativacao = 'gold'
 
 #arma
 dados_arma = {
-    'espada1': {'cooldown': 200, 'dano': 30, 'imagem':'docs/assets/img/espadas/espada1/espada1.png'},
-    'espada2': {'cooldown': 450, 'dano': 45, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'},
+    'espada1': {'cooldown': 200, 'dano': 15, 'imagem':'docs/assets/img/espadas/espada1/espada1.png'},
+    'espada2': {'cooldown': 450, 'dano': 25, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'},
     'cajado': {'cooldown': 450, 'dano': 85, 'imagem':'docs/assets/img/espadas/cajado/cajado.png'}
 }
 
