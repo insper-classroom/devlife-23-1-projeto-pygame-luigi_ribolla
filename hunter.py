@@ -44,7 +44,7 @@ class Hunter(Entidades):
         self.vida = self.stats['vida'] 
         self.energia = self.stats['energia']
         self.vel = self.stats['velocidade']
-        self.xp = 10
+        self.xp = 0
 
         # tempo de dano
         self.vulneravel = True
@@ -141,6 +141,8 @@ class Hunter(Entidades):
                 self.ataque = True
                 self.ataque_timer = pg.time.get_ticks()
                 self.criar_ataque()
+                if self.arma_index == 2:
+                    self.energia -= 10
 
             # magia
             if tecla[pg.K_LSHIFT]:
@@ -158,6 +160,9 @@ class Hunter(Entidades):
                     self.arma_index = 1
                     self.arma = list(dados_arma.keys())[self.arma_index]
                 elif self.arma_index == 1:
+                    self.arma_index = 2
+                    self.arma = list(dados_arma.keys())[self.arma_index]
+                elif self.arma_index == 2:
                     self.arma_index = 0
                     self.arma = list(dados_arma.keys())[self.arma_index]
 
@@ -170,6 +175,9 @@ class Hunter(Entidades):
                 elif self.magia_index == 1:
                     self.magia_index = 0
                     self.magia = list(dados_magia.keys())[self.magia_index]
+
+        if self.energia <= 0:
+            dados_arma['cajado']['dano'] = 0
 
     def update_estado(self):
         #idle

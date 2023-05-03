@@ -27,19 +27,19 @@ cor_borda_ativacao = 'gold'
 #arma
 dados_arma = {
     'espada1': {'cooldown': 300, 'dano': 20, 'imagem':'docs/assets/img/espadas/espada1/espada1.png'},
-    'espada2': {'cooldown': 450, 'dano': 30, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'}
+    'espada2': {'cooldown': 450, 'dano': 30, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'},
+    'cajado': {'cooldown': 450, 'dano': 80, 'imagem':'docs/assets/img/espadas/cajado/cajado.png'}
 }
 
 #magia
 dados_magia = {
-    'gelo' : {'forca': 7, 'custo':20, 'imagem':'docs/assets/img/magias/magia2/icone.png'},
-    'conhecimento' : {'forca': 23, 'custo':40, 'imagem':'docs/assets/img/magias/magia1/icone.png'}
+    'cajado' : {'forca': 7, 'custo':20, 'imagem':'docs/assets/img/espadas/cajado/cajado.png'},
 }
 # inimigos 
 monstros = { 
-    'fogo': {'vida': 70, 'xp': 100, 'dano': 10, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 3, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 300},
+    'fogo': {'vida': 70, 'xp': 80, 'dano': 10, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 3, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 300},
     'skull': {'vida': 100, 'xp': 120, 'dano': 20, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 2, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 350},
     'beast': {'vida': 200, 'xp': 200, 'dano': 40, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 1.8, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 400},
     'cyclope': {'vida': 200, 'xp': 200, 'dano': 30, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 450},
-    'boss': {'vida': 1000, 'xp': 300, 'dano': 70, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 400},
+    'boss': {'vida': 1000, 'xp': 500, 'dano': 70, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 400},
 } 

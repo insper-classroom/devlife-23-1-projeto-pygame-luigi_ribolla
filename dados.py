@@ -68,12 +68,12 @@ class Dados:
 
         self.display_surface.blit(arma_sup,rect_arma)
 
-    def sobrepor_magia(self,magia_index,troca):
-        rect_fundo = self.selecionar(100,510,troca) #magia
-        magia_sup = self.imagem_magia[magia_index]
-        rect_magia = magia_sup.get_rect(center = rect_fundo.center)
+    # def sobrepor_magia(self,magia_index,troca):
+    #     rect_fundo = self.selecionar(100,510,troca) 
+    #     magia_sup = self.imagem_magia[magia_index]
+    #     rect_magia = magia_sup.get_rect(center = rect_fundo.center)
 
-        self.display_surface.blit(magia_sup,rect_magia)
+    #     self.display_surface.blit(magia_sup,rect_magia)
 
     def display(self, hunter):
         self.mostrar_barra(hunter.vida,hunter.stats['vida'],self.rect_barra_vida,cor_vida)
@@ -82,4 +82,4 @@ class Dados:
         self.mostrar_xp(hunter.xp)
 
         self.sobrepor_arma(hunter.arma_index,not hunter.pode_trocar_arma)
-        self.sobrepor_magia(hunter.magia_index, not hunter.pode_trocar_magia)
+        # self.sobrepor_magia(hunter.magia_index, not hunter.pode_trocar_magia)

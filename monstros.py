@@ -4,7 +4,7 @@ from entidades import Entidades
 from settings import * 
 
 class Monstros(Entidades):
-    def __init__(self, tipo, posicao, grupos, objetos, dano_player):
+    def __init__(self, tipo, posicao, grupos, objetos, dano_player, add_xp):
         super().__init__(grupos)
         self.tipo = "monstro"
         self.nome = tipo
@@ -37,6 +37,7 @@ class Monstros(Entidades):
         self.tempo_ataque = None
         self.ataque_cooldown = 500
         self.dano_player = dano_player
+        self.add_xp = add_xp
 
         # invencibilidade
         self.vuneravel = True
@@ -233,6 +234,7 @@ class Monstros(Entidades):
     def morte(self):
         if self.vida <= 0:
             self.kill()
+            self.add_xp(self.xp)
 
     def reacao(self):
         if not self.vuneravel:
