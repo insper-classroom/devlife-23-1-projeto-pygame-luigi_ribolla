@@ -18,7 +18,7 @@ class Hunter(Entidades):
         # movimentação
 
         self.ataque = False
-        self.ataque_cooldown = 150
+        self.ataque_cooldown = 175
         self.ataque_timer = None
 
         self.objetos = objetos
@@ -40,8 +40,8 @@ class Hunter(Entidades):
         self.tempo_troca_magia = None
 
         #stats
-        self.stats = {'vida': 100,'energia': 100, 'dano': 10, 'magia': 5, 'velocidade': 4}
-        self.max_stats = {'vida': 300,'energia': 140, 'dano': 20, 'magia': 10, 'velocidade': 10}
+        self.stats = {'vida': 360,'energia': 200, 'dano': 15, 'magia': 5, 'velocidade': 4}
+        self.max_stats = {'vida': 500,'energia': 300, 'dano': 20, 'magia': 10, 'velocidade': 10}
         self.custo_upgrade = {'vida': 100,'energia': 100, 'dano': 100, 'magia': 100, 'velocidade': 100}
         self.vida = self.stats['vida'] 
         self.energia = self.stats['energia']
@@ -52,7 +52,7 @@ class Hunter(Entidades):
         # tempo de dano
         self.vulneravel = True
         self.tempo_ataque = None
-        self.duracao_invulnerabilidade = 500
+        self.duracao_invulnerabilidade = 600
         
     def sprites(self):
         pasta = 'docs/assets/img/hunter/'
@@ -261,6 +261,13 @@ class Hunter(Entidades):
         image = animacao[int(self.index)]
         self.image = pg.transform.scale(image, (TAMANHO_TILE, TAMANHO_TILE))
         self.rect = self.image.get_rect(center = self.hitbox.center)
+
+        #flicker
+        if not self.vulneravel:
+            alpha = self.wave_value()
+            self.image.set_alpha(alpha)
+        else:
+            self.image.set_alpha(255)
 
     def dano_total(self):
         dano_base = self.stats['dano']

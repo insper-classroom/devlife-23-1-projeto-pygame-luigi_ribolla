@@ -180,6 +180,8 @@ class Monstros(Entidades):
 
     def animacao(self):
         if self.nome == 'boss':
+            if self.estado == 'ataque':
+                self.vel_frame = 0.21
             animacao = self.animacoes[self.estado]
         else:
             animacao = self.animacoes['idle']
@@ -194,6 +196,7 @@ class Monstros(Entidades):
         if self.nome == 'boss':
             if self.estado == 'ataque':
                 self.image = pg.transform.scale(image, (480, 384))
+
             else:
                 self.image = pg.transform.scale(image, (320, 288))
         elif self.nome == 'fogo':

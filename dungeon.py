@@ -8,6 +8,8 @@ from random import choice
 from arma import Arma
 from dados import Dados
 from monstros import Monstros
+from magia import Magia
+from particles import *
 
 class Dungeon:
     def __init__(self):
@@ -28,6 +30,10 @@ class Dungeon:
 
         #interface
         self.dados = Dados()
+
+        #particles 
+        # self.animation_player = AnimationPlayer()
+        # self.magia = Magia(self.animation_player)
 
     def mapa(self):
         mapas_csv = {
@@ -104,6 +110,8 @@ class Dungeon:
 
     def criar_magia(self,estilo,forca,custo):
         print(estilo)
+        print(forca)
+        print(custo)
     
     def logica_ataque_hunter(self):
         if self.sprites_ataque:
@@ -117,14 +125,15 @@ class Dungeon:
     def dano_player(self,dano,ataque):
         if self.hunter.vulneravel:
             self.hunter.vida -= dano
-            if self.hunter.vida <= 0:
-                return False
             self.hunter.vulneravel = False
             self.hunter.tempo_ataque = pg.time.get_ticks()
-        return True
+        # spawn particles
+            # self.animation_player.create_particles(ataque, self.hunter.rect.center, [self.sprites])
 
     def add_xp(self,soma):
         self.hunter.xp += soma
+        if self.hunter.vida < 360:
+            self.hunter.vida += 2
 
     def desenha(self):
         self.sprites.custom_draw(self.hunter)

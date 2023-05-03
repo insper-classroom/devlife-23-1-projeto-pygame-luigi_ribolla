@@ -26,9 +26,9 @@ cor_borda_ativacao = 'gold'
 
 #arma
 dados_arma = {
-    'espada1': {'cooldown': 300, 'dano': 20, 'imagem':'docs/assets/img/espadas/espada1/espada1.png'},
-    'espada2': {'cooldown': 450, 'dano': 30, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'},
-    'cajado': {'cooldown': 450, 'dano': 80, 'imagem':'docs/assets/img/espadas/cajado/cajado.png'}
+    'espada1': {'cooldown': 200, 'dano': 30, 'imagem':'docs/assets/img/espadas/espada1/espada1.png'},
+    'espada2': {'cooldown': 450, 'dano': 45, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'},
+    'cajado': {'cooldown': 450, 'dano': 85, 'imagem':'docs/assets/img/espadas/cajado/cajado.png'}
 }
 
 #magia
@@ -37,9 +37,9 @@ dados_magia = {
 }
 # inimigos 
 monstros = { 
-    'fogo': {'vida': 70, 'xp': 80, 'dano': 10, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 3, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 300},
-    'skull': {'vida': 100, 'xp': 120, 'dano': 20, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 2, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 350},
-    'beast': {'vida': 200, 'xp': 200, 'dano': 40, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 1.8, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 400},
-    'cyclope': {'vida': 200, 'xp': 200, 'dano': 30, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 450},
-    'boss': {'vida': 1000, 'xp': 500, 'dano': 70, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 400},
+    'fogo': {'vida': 90, 'xp': 80, 'dano': 35, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 2.75, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 330},
+    'skull': {'vida': 130, 'xp': 120, 'dano': 45, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 2, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 350},
+    'beast': {'vida': 200, 'xp': 200, 'dano': 55, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 1.75, 'resistencia': 5, 'raio_ataque': 60, 'raio_visao': 400},
+    'cyclope': {'vida': 200, 'xp': 200, 'dano': 50, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 450},
+    'boss': {'vida': 2000, 'xp': 500, 'dano': 70, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 3, 'raio_ataque': 205, 'raio_visao': 400},
 } 
