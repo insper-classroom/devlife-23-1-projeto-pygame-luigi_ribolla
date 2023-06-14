@@ -6,6 +6,7 @@ from entidades import Entidades
 class Hunter(Entidades):
     def __init__(self, posicao, grupos, objetos,criar_ataque,apagar_ataque,criar_magia):
         super().__init__(grupos)
+        self.nome = 'hunter'
         self.image = pg.image.load('docs/assets/img/hunter/idle.png').convert_alpha()
         self.rect = self.image.get_rect(center = posicao)
         self.hitbox = self.rect
@@ -148,8 +149,9 @@ class Hunter(Entidades):
                 if self.arma_index == 2:
                     self.energia -= 10
                 self.som_ataque.play()
-                
 
+                # self.ataque = False
+            
             # magia
             if tecla[pg.K_LSHIFT]:
                 self.ataque = True

@@ -11,7 +11,7 @@ class Loop:
         self.window = pg.display.set_mode((LARGURA, ALTURA))
         self.jogo = Jogo()
         self.fim = Fim()
-        background = pg.image.load("docs/assets/img/tela_inicio2.jpg")
+        background = pg.image.load("docs/assets/img/inicial1.png")
         self.background = pg.transform.scale(background, (LARGURA, ALTURA))
         pg.mixer.music.load("docs/assets/snd/background_music.ogg")
         pg.mixer.music.set_volume(1)

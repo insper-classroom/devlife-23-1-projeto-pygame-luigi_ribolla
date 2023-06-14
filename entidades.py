@@ -13,9 +13,11 @@ class Entidades(pg.sprite.Sprite):
             self.direcao = self.direcao.normalize() # normaliza o vetor
         
         self.hitbox.x += self.direcao.x * vel
-        self.collision("x")
+        if self.nome != "boss":
+            self.collision("x")
         self.hitbox.y += self.direcao.y * vel
-        self.collision("y")
+        if self.nome != "boss":
+            self.collision("y")
         self.rect.center = self.hitbox.center
 
     def collision(self, direcao):

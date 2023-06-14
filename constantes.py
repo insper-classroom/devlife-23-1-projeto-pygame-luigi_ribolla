@@ -1,5 +1,3 @@
-import pygame as pg
-
 LARGURA = 1200
 ALTURA = 610
 FPS = 60
@@ -26,9 +24,9 @@ cor_borda_ativacao = 'gold'
 
 #arma
 dados_arma = {
-    'espada1': {'cooldown': 200, 'dano': 15, 'imagem':'docs/assets/img/espadas/espada1/espada1.png'},
-    'espada2': {'cooldown': 450, 'dano': 25, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'},
-    'cajado': {'cooldown': 450, 'dano': 85, 'imagem':'docs/assets/img/espadas/cajado/cajado.png'}
+    'espada1': {'cooldown': 200, 'dano': 20, 'imagem':'docs/assets/img/espadas/espada1/espada1.png'},
+    'espada2': {'cooldown': 500, 'dano': 30, 'imagem':'docs/assets/img/espadas/espada2/espada2.png'},
+    'cajado': {'cooldown': 450, 'dano': 60, 'imagem':'docs/assets/img/espadas/cajado/cajado.png'}
 }
 
 #magia
@@ -41,5 +39,5 @@ monstros = {
     'skull': {'vida': 130, 'xp': 120, 'dano': 45, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 2, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 350},
     'beast': {'vida': 200, 'xp': 200, 'dano': 55, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 1.75, 'resistencia': 5, 'raio_ataque': 60, 'raio_visao': 400},
     'cyclope': {'vida': 200, 'xp': 200, 'dano': 50, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 450},
-    'boss': {'vida': 2200, 'xp': 500, 'dano': 40, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': - 1, 'raio_ataque': 100, 'raio_visao': 400},
+    'boss': {'vida': 2200, 'xp': 480, 'dano': 40, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': - 1, 'raio_ataque': 100, 'raio_visao': 400},
 } 
