@@ -22,6 +22,8 @@ class Jogo:
                     sys.exit()
             if self.dungeon.hunter.health() == False:
                 return False 
+            if self.dungeon.hunter.xp == 4000:
+                return False
 
             self.window.fill((0,0,0))
             self.dungeon.desenha()
