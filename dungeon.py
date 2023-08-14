@@ -133,10 +133,10 @@ class Dungeon:
         # spawn particles
             # self.animation_player.create_particles(ataque, self.hunter.rect.center, [self.sprites])
 
-    def add_xp(self,soma):
+    def add_xp(self,soma,vida):
         self.hunter.xp += soma
         if self.hunter.vida < 360:
-            self.hunter.vida += 5
+            self.hunter.vida += vida
         self.monstro.play()
             
 
@@ -178,4 +178,3 @@ class Camera(pg.sprite.Group):
         monstros_sprites = [sprite for sprite in self.sprites() if hasattr(sprite,"tipo") and sprite.tipo == 'monstro']
         for monstro in monstros_sprites:
             monstro.monstro_update(hunter)
-        

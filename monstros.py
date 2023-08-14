@@ -237,7 +237,14 @@ class Monstros(Entidades):
     def morte(self):
         if self.vida <= 0:
             self.kill()
-            self.add_xp(self.xp)
+            if self.nome == 'fogo':
+                self.add_xp(self.xp, 5)
+            if self.nome == 'skull':
+                self.add_xp(self.xp, 8)
+            if self.nome == 'beast' or self.nome == 'cyclope':
+                self.add_xp(self.xp, 10)
+            if self.nome == 'boss':
+                self.add_xp(self.xp, 20)
 
     def reacao(self):
         if not self.vuneravel:

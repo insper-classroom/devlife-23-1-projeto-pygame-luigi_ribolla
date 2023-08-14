@@ -116,7 +116,7 @@ class Hunter(Entidades):
 
     def input(self):
         tecla = pg.key.get_pressed()
-        
+
         # movimentação 
         if self.ataque == False:
             if tecla[pg.K_w]:
@@ -174,15 +174,15 @@ class Hunter(Entidades):
                     self.arma_index = 0
                     self.arma = list(dados_arma.keys())[self.arma_index]
 
-            if tecla[pg.K_m] and self.pode_trocar_magia:
-                self.pode_trocar_magia = False
-                self.tempo_troca_magia = pg.time.get_ticks()
-                if self.magia_index == 0:
-                    self.magia_index = 1
-                    self.magia = list(dados_magia.keys())[self.magia_index]
-                elif self.magia_index == 1:
-                    self.magia_index = 0
-                    self.magia = list(dados_magia.keys())[self.magia_index]
+            # if tecla[pg.K_m] and self.pode_trocar_magia:
+            #     self.pode_trocar_magia = False
+            #     self.tempo_troca_magia = pg.time.get_ticks()
+            #     if self.magia_index == 0:
+            #         self.magia_index = 1
+            #         self.magia = list(dados_magia.keys())[self.magia_index]
+            #     elif self.magia_index == 1:
+            #         self.magia_index = 0
+            #         self.magia = list(dados_magia.keys())[self.magia_index]
 
         if self.energia <= 0:
             dados_arma['cajado']['dano'] = 0

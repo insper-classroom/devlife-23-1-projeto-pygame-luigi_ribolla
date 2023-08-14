@@ -35,9 +35,9 @@ dados_magia = {
 }
 # inimigos 
 monstros = { 
-    'fogo': {'vida': 90, 'xp': 80, 'dano': 35, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 2.75, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 330},
-    'skull': {'vida': 130, 'xp': 120, 'dano': 45, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 2, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 350},
-    'beast': {'vida': 200, 'xp': 200, 'dano': 55, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 1.75, 'resistencia': 5, 'raio_ataque': 60, 'raio_visao': 400},
-    'cyclope': {'vida': 200, 'xp': 200, 'dano': 50, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 5, 'raio_ataque': 50, 'raio_visao': 450},
-    'boss': {'vida': 2200, 'xp': 480, 'dano': 40, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': - 1, 'raio_ataque': 100, 'raio_visao': 400},
+    'fogo': {'vida': 120, 'xp': 80, 'dano': 30, 'ataque': 'flam', 'som_attaque':'', 'velocidade': 2.75, 'resistencia': 3, 'raio_ataque': 35, 'raio_visao': 330},
+    'skull': {'vida': 180, 'xp': 120, 'dano': 40, 'ataque': 'blast', 'som_attaque':'', 'velocidade': 2, 'resistencia': 5, 'raio_ataque': 35, 'raio_visao': 350},
+    'beast': {'vida': 360, 'xp': 260, 'dano': 60, 'ataque': 'slash', 'som_attaque':'', 'velocidade': 1.75, 'resistencia': 5, 'raio_ataque': 45, 'raio_visao': 400},
+    'cyclope': {'vida': 300, 'xp': 260, 'dano': 50, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': 4, 'raio_ataque': 43, 'raio_visao': 450},
+    'boss': {'vida': 2500, 'xp': 1000, 'dano': 70, 'ataque': 'charge', 'som_attaque':'', 'velocidade': 2.5, 'resistencia': - 1, 'raio_ataque': 110, 'raio_visao': 400},
 } 
